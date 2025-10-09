@@ -2,14 +2,14 @@
 			<div class="main-header">
 				<!-- Logo -->
 				<div class="header-left active">
-					<a href="index.html" class="logo logo-normal">
-						<img src="assets/img/logo.svg" alt="Img">
+					<a href="index.php" class="logo logo-normal">
+						<img src="<?php echo $siteinfo['site_logo'];?>" alt="Img">
 					</a>
-					<a href="index.html" class="logo logo-white">
-						<img src="assets/img/logo-white.svg" alt="Img">
+					<a href="index.php" class="logo logo-white">
+						<img src="<?php echo $siteinfo['site_logo'];?>" alt="Img">
 					</a>
-					<a href="index.html" class="logo-small">
-						<img src="assets/img/logo-small.png" alt="Img">
+					<a href="index.php" class="logo-small">
+						<img src="<?php echo $siteinfo['site_logo'];?>" alt="Img">
 					</a>
 				</div>
 				<!-- /Logo -->
@@ -68,11 +68,11 @@
                                     }?></p>
 								</div>
 							</div>
-							<a class="dropdown-item" href="profile.html"><i class="ti ti-user-circle me-2"></i>MyProfile</a>
-							<!--a class="dropdown-item" href="sales-report.html"><i class="ti ti-file-text me-2"></i>Reports</a>
-							<a class="dropdown-item" href="general-settings.html"><i class="ti ti-settings-2 me-2"></i>Settings</a-->
+							<a class="dropdown-item" href="profile.php"><i class="ti ti-user-circle me-2"></i>MyProfile</a>
+							<!--a class="dropdown-item" href="sales-report.php"><i class="ti ti-file-text me-2"></i>Reports</a>
+							<a class="dropdown-item" href="general-settings.php"><i class="ti ti-settings-2 me-2"></i>Settings</a-->
 							<hr class="my-2">
-							<a class="dropdown-item logout pb-0" href="signin.html"><i class="ti ti-logout me-2"></i>Logout</a>
+							<a class="dropdown-item logout pb-0" href="signin.php"><i class="ti ti-logout me-2"></i>Logout</a>
 						</div>
 					</li>
 				</ul>
@@ -83,9 +83,9 @@
 					<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
 						aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="general-settings.html">Settings</a>
-						<a class="dropdown-item" href="signin.html">Logout</a>
+						<a class="dropdown-item" href="profile.php">My Profile</a>
+						<a class="dropdown-item" href="general-settings.php">Settings</a>
+						<a class="dropdown-item" href="signin.php">Logout</a>
 					</div>
 				</div>
 				<!-- /Mobile Menu -->

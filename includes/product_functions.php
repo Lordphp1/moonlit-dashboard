@@ -39,6 +39,7 @@ function addProduct($conn, $categoryId, $name, $description, $prices, $admin) {
 
         return true;
     } catch (Exception $e) {
+        print_r($e);
         return false;
     }
 }

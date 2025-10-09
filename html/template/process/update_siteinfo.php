@@ -10,9 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tmpName = $_FILES['site_logo']['tmp_name'];
         $fileName = time() . "_" . basename($_FILES['site_logo']['name']);
         $targetFile = $uploadDir . $fileName;
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'];
+$baseUrl = $protocol . "://" . $host . "/moonlit_dashboard/html/template/process/";
 
         if (move_uploaded_file($tmpName, $targetFile)) {
             $logoPath = $targetFile;
+
         }
     } else {
         // if no file uploaded, keep old logo
@@ -25,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'site_name'   => $_POST['site_name'],
         'site_email'  => $_POST['site_email'],
         'site_phone'  => $_POST['site_phone'],
-        'site_logo'   => $logoPath,
+        'site_logo'   => $baseUrl .$logoPath,
         'site_address'=> $_POST['site_address'],
         'site_state'  => $_POST['site_state'],
         'site_city'   => $_POST['site_city']

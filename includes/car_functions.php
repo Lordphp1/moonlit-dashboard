@@ -14,6 +14,48 @@ function getCarTypes($conn) {
     }
     return $categories;
 }
+function getCarTypesWithPrices($conn) {
+    // Fetch all car types and the admin who added them
+    $sql = "SELECT c.*, a.username 
+            FROM " . CARTYPE . " c
+            LEFT JOIN " . ADMINS . " a ON c.car_added_by = a.id
+            ORDER BY c.created_at DESC";
+
+    $result = mysqli_query($conn, $sql);
+    $carTypes = [];
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $carTypeId = $row['car_id'];
+
+            // Fetch all prices linked to this car type
+            $priceQuery = "
+                SELECT p.id, p.price_unique_id, p.product_id, p.car_type_id, p.price, pr.product_name 
+                FROM product_prices p
+                LEFT JOIN " . PRODUCTS . " pr ON p.product_id = pr.id
+                WHERE p.car_type_id = ?
+            ";
+
+            $stmt = $conn->prepare($priceQuery);
+            $stmt->bind_param("i", $carTypeId);
+            $stmt->execute();
+            $priceResult = $stmt->get_result();
+
+            $prices = [];
+            while ($priceRow = $priceResult->fetch_assoc()) {
+                $prices[] = $priceRow;
+            }
+            $stmt->close();
+
+            // Attach prices to this car type
+            $row['prices'] = $prices;
+            $carTypes[] = $row;
+        }
+    }
+
+    return $carTypes;
+}
+
 
 function addCarType($conn, $name, $status, $adminId) {
      $slug = "Car-".rand(000000,999999);

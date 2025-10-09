@@ -351,7 +351,7 @@ document.addEventListener("click", function(e) {
             showToast(data.message, data.status);
             if (data.status == "success") {
                 bootstrap.Modal.getInstance(document.getElementById("delete-modal")).hide();
-                windows.reload()
+                //windows.reload();
             }
         })
         .catch(error => {
