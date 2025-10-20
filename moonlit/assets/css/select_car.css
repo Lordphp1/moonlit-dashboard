@@ -1,0 +1,121 @@
+body {
+  font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.ob-car-selection {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+  background: url('../images/rightbanner.jpg') no-repeat center center/cover;
+  z-index: 1;
+}
+
+.ob-car-selection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.ob-car-selection .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Keep consistent left alignment with first card */
+.ob-title-wrap {
+  margin-left: 0.5rem;
+}
+.ob-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+  display: inline-block; /* allow ::after to align properly */
+  position: relative;
+}
+
+.ob-title::after {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background: #ccc;
+  margin-left: 15px;
+  vertical-align: middle;
+  transform: translateY(-2px); /* fine-tune vertical position */
+}
+
+
+.ob-subtitle {
+  font-weight: 300;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+/* Cards */
+.ob-car-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  height: 441px;
+  width: 333px;
+}
+
+.ob-car-card img {
+  width: 100%;
+  height: 441px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ob-card-overlay-top,
+.ob-card-overlay-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.ob-card-overlay-top {
+  top: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.ob-card-overlay-bottom {
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  transition: opacity 0.4s ease;
+}
+
+.ob-car-name {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.ob-car-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.ob-car-card:hover .ob-card-overlay-bottom {
+  opacity: 0.9;
+}

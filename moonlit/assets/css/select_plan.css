@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --orange: #ffb400;
+  --purple: #b033ff;
+  --green: #00e68a;
+  --blue: #3db4ff;
+  --glass: rgba(255,255,255,0.05);
+  --bg-dark: #0f0f0f;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "League Spartan", sans-serif;
+  color: #fff;
+  position: relative;
+  background: url('../images/rightbanner.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* ✅ Global dark overlay for background image */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* adjust opacity (0.5–0.8) */
+  z-index: 0;
+}
+
+/* Ensure content sits above overlay */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ob-select-plan::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
+}
+
+.ob-select-plan {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.ob-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.ob-title-line {
+  display: inline-block;
+  width: 60px;
+  height: 2px;
+  background: #ccc;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+.ob-subtitle {
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+.plan-tab {
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  gap: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.ob-tab-btn {
+  background: transparent;
+  color: #eee;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.ob-tab-btn.active,
+.ob-tab-btn:hover {
+  background: #fff;
+  color: #111;
+  box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+}
+
+/* CARD STYLES */
+.ob-plan-card {
+
+  border-radius: 16px;
+  border: 2px solid transparent;
+  padding: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+.ob-plan-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.border-orange { border-color: var(--orange); }
+.border-purple { border-color: var(--purple); }
+.border-green { border-color: var(--green); }
+.border-blue { border-color: var(--blue); }
+
+.ob-plan-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-align: start;
+}
+
+.ob-section-title {
+  font-weight: 600;
+  color: #bbb;
+  margin-bottom: 2px;
+  text-align: left;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+line-height: 19px;
+letter-spacing: -0.5px;
+vertical-align: middle;
+text-transform: capitalize;
+
+}
+.ob-card-ft{
+      background: var(--glass);
+      padding: 10px;
+      border-radius: 15px;
+      text-align: start;
+      margin-bottom: 10px;
+}
+
+.ob-plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  text-align: left;
+}
+
+.ob-plan-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.check-icon {
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-right: 8px;
+}
+
+.ob-plan-bottom {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+  background-color: blue;
+  padding: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.ob-plan-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ob-plan-next {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+  border: solid;
+  padding-top: 5px;
+}
+.ob-plan-next.purple { background: var(--purple); }
+.ob-plan-next.green { background: var(--green); }
+.ob-plan-next.blue { background: var(--blue); }
+
+.ob-plan-next:hover {
+  background: #fff;
+}

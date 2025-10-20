@@ -1,0 +1,112 @@
+body {
+  font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: url('../images/rightbanner.jpg') no-repeat center center/cover;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.ob-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.ob-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.ob-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.ob-subtitle {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 40px;
+}
+
+.ob-status-card {
+ 
+    background-color: #FFFFFFFA;
+
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 450px;
+  text-align: start;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.mt-10{
+    margin-top: 30px;
+}
+
+.ob-status-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ob-status-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.ob-status-icon {
+  width: 28px;
+  height: 28px;
+}
+.ob-title-line {
+  display: inline-block;
+  width: 90px; /* adjust length */
+  height: 3px;
+  background-color: #a29d9d;
+  border-radius: 2px;
+}
+.ob-status-item h5 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ob-status-item p {
+  margin: 3px 0 0 0;
+  font-size: 0.9rem;
+  color: #666666;
+}
+
+.ob-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #000000;
+  margin-top: 10px;
+}
+
+/* Optional animation for pending */
+.ob-status-icon.pending {
+  animation: pulse 1.5s infinite;
+  filter: brightness(1.5);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}

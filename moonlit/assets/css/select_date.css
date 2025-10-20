@@ -1,0 +1,108 @@
+/* ========== FIXED VERSION ========== */
+.ob-schedule-container {
+  display: flex;
+  gap: 20px;
+  background-color: #fff; /* Dark semi-transparent background */
+  border-radius: 12px;
+  padding: 25px;
+  color: black;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 2;
+}
+
+.ob-calendar {
+  width: 280px;
+}
+
+.ob-calendar h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.ob-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.ob-calendar-header button {
+  background: transparent;
+  border: 1px solid #2c2a2a;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 3px 10px;
+}
+
+.ob-weekdays, .ob-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.ob-weekdays div {
+  font-weight: bold;
+  color: #ccc;
+}
+
+.ob-days div {
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.ob-days div:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.ob-days div.active {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.ob-timezone {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 15px;
+}
+
+.ob-times {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ob-times h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.ob-time-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  color: #3b82f6;
+  font-weight: 600;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.ob-time-btn:hover,
+.ob-time-btn.active {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}

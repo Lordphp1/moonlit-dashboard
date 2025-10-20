@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Plan</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- League Spartan -->
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/select_plan.css">
+</head>
+<body>
+
+  <main class="ob-select-plan">
+    <div class="container">
+
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <h1 class="ob-title">Pick Your Shine. Pick Your Vibe.<span class="ob-title-line"></span></h1>
+        <p class="ob-subtitle">Select Your Package. Same Premium Team, Different Levels Of Care.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="d-flex justify-content-center ob-plan-tabs-wrap mb-5">
+        <div class="plan-tab" role="tablist" aria-label="Plan frequency">
+          <button class="ob-tab-btn active" data-tab="mobile">Mobile Detailing</button>
+          <button class="ob-tab-btn" data-tab="maintenance">Maintenance</button>
+          <button class="ob-tab-btn" data-tab="ceramic">Ceramic Coating</button>
+        </div>
+      </div>
+
+      <!-- Plan Cards -->
+      <div class="row justify-content-center ob-plans">
+        <!-- Mini Detail -->
+        <div class="col-md-3 col-sm-6 mb-4 plan-card-wrap" data-frequency="mobile">
+          <div class="ob-plan-card border-orange">
+            <span class="ob-plan-name">Mini- Detail<br/> <b class="ob-section-title">Exterior + Interior </b></span>
+          
+            <div class="ob-card-ft">
+            <span class="text-warning">Exterior</span>
+            <ul class="ob-plan-features">
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Foam Wash</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Dashboard Crevices & Vent Cleaned</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Deep Vacuumed</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Trim Restored To Black</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Scratch Spot Polishing</li>
+            </ul>
+        </div>
+          
+          <div class="ob-card-ft">
+            <span class="text-warning">Interior</span>
+            <ul class="ob-plan-features">
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Suede & Alcantara Cleaned</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Leathers Cleaned & Conditioned</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Plastics, Rubber Seals & Trim Hydrated</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Trim Restored To Black</li>
+              <li><span class="check-icon"><i class="bi bi-check"></i></span> Scratch Spot Polishing</li>
+            </ul>
+        </div>
+
+        
+
+            <div class="ob-plan-bottom bg-warning">
+              <div class="ob-plan-price text-dark">R 500</div>
+              <div class="ob-plan-next" onclick="goToDate()">
+                <i class="bi bi-arrow-right"></i>
+            </div>
+            </div>
+          </div>
+        </div>
+
+ 
+
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll(".ob-tab-btn");
+    const planCards = document.querySelectorAll(".plan-card-wrap");
+
+    function showTab(tab) {
+      // Activate correct tab button
+      tabButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
+
+      // Show only cards matching that tab
+      planCards.forEach(card => {
+        card.classList.toggle("d-none", card.dataset.frequency !== tab);
+      });
+    }
+
+    // Add event listeners for tab switching
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => showTab(btn.dataset.tab));
+    });
+
+    // ✅ Show the first tab by default
+    showTab("mobile");
+  });
+
+</script>
+  <script src="assets/js/script.js"></script>
