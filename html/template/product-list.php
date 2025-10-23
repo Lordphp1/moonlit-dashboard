@@ -112,38 +112,8 @@ include "../../includes/session.php";
                 <h6>Manage your products</h6>
               </div>
             </div>
-            <ul class="table-top-head">
-              <li>
-                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"
-                  ><img src="assets/img/icons/pdf.svg" alt="img"
-                /></a>
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Excel"
-                  ><img src="assets/img/icons/excel.svg" alt="img"
-                /></a>
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Refresh"
-                  ><i class="ti ti-refresh"></i
-                ></a>
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Collapse"
-                  id="collapse-header"
-                  ><i class="ti ti-chevron-up"></i
-                ></a>
-              </li>
-            </ul>
+  
+            
             <div class="page-btn">
               <a href="add-product.php" class="btn btn-primary"
                 ><i class="ti ti-circle-plus me-1"></i>Add Product</a
@@ -236,13 +206,11 @@ include "../../includes/session.php";
                         <div class="edit-delete-action">
                           <a
                             class="me-2 edit-icon p-2"
-                            href="product-details.php"
+                            href="edit-product.php?id=<?php echo $product['id'];?>"
                           >
                             <i data-feather="eye" class="feather-eye"></i>
                           </a>
-                          <a class="me-2 p-2" href="edit-product.php">
-                            <i data-feather="edit" class="feather-edit"></i>
-                          </a>
+                      
                           <a
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"

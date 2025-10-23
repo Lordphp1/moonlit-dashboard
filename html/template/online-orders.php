@@ -174,6 +174,8 @@ include "../../includes/session.php";
     <div class="mb-3">
       <label class="form-label">Service Price<span class="text-danger ms-1">*</span></label>
       <input type="text" class="form-control" id="carPrice" name="price" placeholder="Price auto-loads" readonly>
+    
+      <span class="text-danger">Callout fee *: <b id="callout_fee">0.00</b></span>
     </div>
   </div>
     <!-- Location Type -->
@@ -182,7 +184,7 @@ include "../../includes/session.php";
                   <label class="form-label">Location Type<span class="text-danger ms-1">*</span></label>
                   <select class="select" name="location_type" id="locationType" required onchange="toggleAddressField()">
                     <option value="">Select</option>
-                    <option value="moonlit">MOONLIT Address</option>
+                    <option value="moonlit"><?php echo $siteinfo['site_name'];?> Address</option>
                     <option value="customer">Customer Location</option>
                   </select>
                 </div>
@@ -196,9 +198,13 @@ include "../../includes/session.php";
 
               <!-- Customer Address -->
               <div class="col-sm-12 col-12 d-none" id="customerAddressSection">
+                
+<input type="hidden" id="site_lon" name="site_lon" value="<?php echo $siteinfo['site_lon']; ?>">
+<input type="hidden" id="site_lat" name="site_lat" value="<?php echo $siteinfo['site_lat']; ?>">
+
                 <div class="mb-3">
                   <label class="form-label">Customer Address<span class="text-danger ms-1">*</span></label>
-                  <input type="text" class="form-control" name="customer_address" placeholder="Enter customer address">
+                  <input type="text" class="form-control" name="customer_address" id="autocomplete" placeholder="Enter customer address">
                 </div>
               </div>
             </div>
@@ -222,22 +228,28 @@ include "../../includes/session.php";
         <div id="SpacingTwo" class="accordion-collapse collapse show" aria-labelledby="headingSpacingTwo">
           <div class="accordion-body border-top">
             <div class="row">
-              <div class="col-lg-4 col-sm-6 col-12">
+              <div class="col-lg-6 col-sm-6 col-12">
                 <div class="mb-3">
                   <label class="form-label">Full Name<span class="text-danger ms-1">*</span></label>
                   <input type="text" class="form-control" name="customer_name" required>
                 </div>
               </div>
-              <div class="col-lg-4 col-sm-6 col-12">
+              <div class="col-lg-6 col-sm-6 col-12">
                 <div class="mb-3">
                   <label class="form-label">Email<span class="text-danger ms-1">*</span></label>
                   <input type="email" class="form-control" name="customer_email" required>
                 </div>
               </div>
-              <div class="col-lg-4 col-sm-6 col-12">
+              <div class="col-lg-6 col-sm-6 col-12">
                 <div class="mb-3">
                   <label class="form-label">Phone Number<span class="text-danger ms-1">*</span></label>
                   <input type="tel" class="form-control" name="customer_phone" required>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-12">
+                <div class="mb-3">
+                  <label class="form-label">Car Make and  Model<span class="text-danger ms-1">*</span></label>
+                  <input type="text" class="form-control" name="car_make" required>
                 </div>
               </div>
             </div>
@@ -252,7 +264,7 @@ include "../../includes/session.php";
       <div class="d-flex align-items-center justify-content-between flex-fill">
         <h5 class="d-flex align-items-center">
           <i data-feather="credit-card" class="text-primary me-2"></i>
-          <span>Payment Method</span>
+          <span>Payment Method / Schedule</span>
         </h5>
       </div>
     </div>
@@ -277,12 +289,22 @@ include "../../includes/session.php";
         <div class="col-lg-6 col-sm-12">
           <div class="mb-3">
             <label class="form-label">Washing Date<span class="text-danger ms-1">*</span></label>
-            <input type="date" class="form-control" name="washing_date" id="washingDate" required>
+            <input type="date" class="form-control" name="washing_date" id="washingDate" required >
           </div>
         </div>
 
-        <!-- Payment Status (Hidden by Default) -->
-        <div class="col-lg-12 col-sm-12 d-none" id="paymentStatusSection">
+        <div class="col-lg-6 col-sm-12 ">
+          <div class="mb-3">
+            <label class="form-label">Washing Time<span class="text-danger ms-1">*<span style="font-size: 10px; color: red">(product and washing date must be selected to view available time)</span></span></label>
+            <select class="select" name="selected_time" id="wash_time">
+              <option value="">Select</option>
+           
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-lg-6 col-sm-12 d-none" id="paymentStatusSection">
           <div class="mb-3">
             <label class="form-label">Payment Status<span class="text-danger ms-1">*</span></label>
             <select class="select" name="payment_status" id="paymentStatus">
@@ -301,6 +323,9 @@ include "../../includes/session.php";
 
     </div>
   </div>
+
+
+  
 
   <div class="col-lg-12">
     <div class="d-flex align-items-center justify-content-end mb-4">
@@ -322,25 +347,70 @@ include "../../includes/session.php";
 	<script src="assets/js/jquery-3.7.1.min.js" type="712042956002651bb9418e95-text/javascript"></script>
 
 
+		<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $siteinfo['site_map_key'];?>&libraries=places"></script>
+
 <script>
+ 
+ 
+
+let autocomplete;
+
+function initAutocomplete() {
+  const input = document.getElementById('autocomplete');
+  autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ['geocode'],
+    componentRestrictions: { country: 'za' } // Restrict to South Africa
+  });
+
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+  const place = autocomplete.getPlace();
+
+  // Store selected coordinates
+  document.getElementById('site_lat').value = place.geometry.location.lat();
+  document.getElementById('site_lon').value = place.geometry.location.lng();
+
+  // Fetch price with the new coordinates
+  fetchPriceWithCoordinates();
+}
+
+window.onload = initAutocomplete;
+
+// ✅ This runs for car type or product changes
 function fetchPrice() {
   const carTypeSelect = document.getElementById('carTypeSelect');
   const productSelect = document.getElementById('productSelect');
   const carPriceInput = document.getElementById('carPrice');
+  const userLat = document.getElementById('site_lat').value;
+  const userLng = document.getElementById('site_lon').value;
 
   const carTypeId = carTypeSelect.value;
   const productId = productSelect.value;
 
+  fetchAvailableTimes();
+
   if (carTypeId && productId) {
+    let bodyData = `car_type_id=${carTypeId}&product_id=${productId}`;
+
+    // ✅ include coordinates if available
+    if (userLat && userLng) {
+      bodyData += `&lat=${userLat}&lng=${userLng}`;
+    }
+
     fetch('process/get_price.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `car_type_id=${carTypeId}&product_id=${productId}`
+      body: bodyData
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       if (data.status === 'success') {
-        carPriceInput.value = data.price;
+        carPriceInput.value = data.base_price;
+        document.getElementById('callout_fee').value = data.callout_fee;
+
+        
       } else {
         carPriceInput.value = '';
         alert(data.message || 'Price not found');
@@ -354,34 +424,124 @@ function fetchPrice() {
     carPriceInput.value = '';
   }
 }
-</script>
-<script>
-function toggleAddressField() {
-  const locationType = document.getElementById('locationType');
-  const customerAddressSection = document.getElementById('customerAddressSection');
 
-  if (locationType.value === 'customer') {
-    customerAddressSection.classList.remove('d-none');
+function fetchPriceWithCoordinates() {
+  const carTypeSelect = document.getElementById('carTypeSelect');
+  const productSelect = document.getElementById('productSelect');
+  const carPriceInput = document.getElementById('carPrice');
+  const carTypeId = carTypeSelect.value;
+  const productId = productSelect.value;
+  const userLat = document.getElementById('site_lat').value;
+  const userLng = document.getElementById('site_lon').value;
+
+  fetchAvailableTimes();
+
+  if (carTypeId && productId && userLat && userLng) {
+    fetch('process/get_price.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `car_type_id=${carTypeId}&product_id=${productId}&lat=${userLat}&lng=${userLng}`
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'success') {
+        carPriceInput.value = data.base_price;
+document.getElementById('callout_fee').innerHTML = data.callout_fee;
+
+      } else {
+        carPriceInput.value = '';
+        alert(data.message || 'Price not found');
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Error fetching price');
+    });
   } else {
-    customerAddressSection.classList.add('d-none');
+    carPriceInput.value = '';
   }
 }
-</script>
+
+// ✅ Fetch available times when date changes
+const washingDateInput = document.getElementById("washingDate");
+washingDateInput.addEventListener("change", fetchAvailableTimes);
+
+function fetchAvailableTimes() {
+  const selectedDate = washingDateInput.value;
+  const productSelect = document.getElementById('productSelect');
+  const productId = productSelect.value;
+
+  if (!selectedDate || !productId) return;
+
+  fetch("process/check_available_times.php", {
+    method: "POST",
+    body: new URLSearchParams({
+      product_id: productId,
+      washingDate: selectedDate
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "success") {
+      showAvailableTimes(data.available_times);
+    } else {
+      showToast("error", data.message);
+    }
+  })
+  .catch(err => {
+    console.error("Error fetching times:", err);
+    showToast("error", "Failed to fetch available times");
+  });
+}
+
+// ✅ Show AM/PM formatted times
+function showAvailableTimes(times) {
+  const select = document.getElementById("wash_time");
+  const containerCol = select.closest(".col-lg-6");
+
+  select.innerHTML = '<option value="">Select Time</option>';
+
+  if (times.length > 0) {
+    times.forEach(hour => {
+      const option = document.createElement("option");
+      option.value = hour; // raw hour value (e.g., 14)
+      const period = hour >= 12 ? "PM" : "AM";
+      const displayHour = hour % 12 || 12;
+      option.textContent = `${displayHour}:00 ${period}`;
+      select.appendChild(option);
+    });
+    containerCol.classList.remove("d-none");
+  } else {
+    containerCol.classList.add("d-none");
+    showToast("error", "No available times for the selected date.");
+  }
+}
 
 
-<script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Toggle address visibility
-  window.toggleAddressField = function() {
-    const locationType = document.getElementById("locationType").value;
-    const customerAddressSection = document.getElementById("customerAddressSection");
-    if (locationType === "customer") {
-      customerAddressSection.classList.remove("d-none");
-    } else {
-      customerAddressSection.classList.add("d-none");
-    }
-  };
+// Toggle address visibility
+window.toggleAddressField = function() {
+  const locationType = document.getElementById("locationType").value;
+  const customerAddressSection = document.getElementById("customerAddressSection");
+  const siteLat = document.getElementById("site_lat");
+  const siteLon = document.getElementById("site_lon");
+  const addressInput = document.getElementById("autocomplete");
+  
+  if (locationType === "customer") {
+    customerAddressSection.classList.remove("d-none");
+  } else {
+    customerAddressSection.classList.add("d-none");
+    
+    // Clear the values when switching back to moonlit address
+    if (siteLat) siteLat.value = '';
+    if (siteLon) siteLon.value = '';
+    if (addressInput) addressInput.value = '';
+    
+    // Optionally re-fetch price with default coordinates
+    fetchPrice();
+  }
+};
 
   // Handle date change for showing payment status
   const washingDateInput = document.getElementById("washingDate");

@@ -29,11 +29,15 @@ $baseUrl = $protocol . "://" . $host . "/html/template/process/";
 
     $data = [
         'site_name'   => $_POST['site_name'],
+        'site_currency'   => $_POST['site_currency'],
+        'site_millage_price' => (float) $_POST['site_millage_price'],
         'site_email'  => $_POST['site_email'],
         'site_phone'  => $_POST['site_phone'],
         'site_logo'   => $baseUrl .$logoPath,
         'site_address'=> $_POST['site_address'],
         'site_state'  => $_POST['site_state'],
+        'site_lon'=> $_POST['site_lon'],
+        'site_lat'  => $_POST['site_lat'],
         'site_city'   => $_POST['site_city']
     ];
 

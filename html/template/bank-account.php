@@ -103,7 +103,7 @@ include "../../includes/session.php";
 							 
 								<div class="card flex-fill mb-0">
 									<div class="card-header">
-										<h4 class="fs-18 fw-bold">Company Settings</h4>
+										<h4 class="fs-18 fw-bold">Bank Settings</h4>
 									</div>
 									<div class="card-body">
 										<form id="siteInfoForm" enctype="multipart/form-data">
@@ -111,143 +111,47 @@ include "../../includes/session.php";
 											<div class="border-bottom mb-3">
 												<div class="card-title-head">
 													<h6 class="fs-16 fw-bold mb-2">
-														<span class="fs-16 me-2"><i class="ti ti-building"></i></span> 
-														Company Information
+														<span class="fs-16 me-2"><i class="ti ti-cash"></i></span> 
+														Bank Information
 													</h6>
 												</div>
-												<div class="row">
-															<div class="col-xl-6 col-lg-6 col-md-6">
-														<div class="mb-3">
-															<label class="form-label">
-																Company Currency  <span class="text-danger">*</span>
-															</label>
-															<input type="text" class="form-control"
-															 value="<?php echo $siteinfo['site_currency'];?>" name="site_currency">
-														</div>
-													</div>
-													<div class="col-xl-6 col-lg-6 col-md-6">
-														<div class="mb-3">
-															<label class="form-label">
-																Price Per Millage<span class="text-danger">*</span>
-															</label>
-															<input type="text" name="site_millage_price" class="form-control"  value="<?php echo $siteinfo['site_mileage_price'];?>">
-														</div>
-													</div>
-												</div>
+											
+												
 												<div class="row">
 											
 													<div class="col-xl-4 col-lg-6 col-md-4">
 														<div class="mb-3">
 															<label class="form-label">
-																Company Name  <span class="text-danger">*</span>
+																Bank Name  <span class="text-danger">*</span>
 															</label>
 															<input type="text" class="form-control"
-															 value="<?php echo $siteinfo['site_name'];?>" name="site_name">
+															 value="<?php echo $sitebank['bank_name'];?>" name="bank_name">
 														</div>
 													</div>
 													<div class="col-xl-4 col-lg-6 col-md-4">
 														<div class="mb-3">
 															<label class="form-label">
-																Company Email Address  <span class="text-danger">*</span>
+																Account Number  <span class="text-danger">*</span>
 															</label>
-															<input type="email" name="site_email" class="form-control"  value="<?php echo $siteinfo['site_email'];?>">
+															<input type="number" name="account_number"
+															 class="form-control"  value="<?php echo $sitebank['account_number'];?>">
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="mb-3">
 															<label class="form-label">
-																Phone Number <span class="text-danger">*</span>
+																Account Name <span class="text-danger">*</span>
 															</label>
-															<input type="text" name="site_phone" class="form-control"  value="<?php echo $siteinfo['site_phone'];?>">
+															<input type="text" name="account_name" 
+															class="form-control"  value="<?php echo $sitebank['account_name'];?>">
 														</div>
 													</div>
 											
 												
 												</div>
 											</div>
-											<div class="border-bottom mb-3 pb-3">
-												<div class="card-title-head">
-													<h6 class="fs-16 fw-bold mb-2">
-														<span class="fs-16 me-2"><i class="ti ti-photo"></i></span> 
-														Company Logo
-													</h6>
-												</div>
-												<div class="row align-items-center gy-3">
-													<div class="col-xl-9">
-														<div class="row gy-3 align-items-center">
-															<div class="col-lg-4">
-																<div class="logo-info">
-																	<h6 class="fw-medium">Company Icon</h6>
-																	<p>Upload Icon of your Company</p>
-																</div>
-															</div>
-															<div class="col-lg-8">
-																<div class="profile-pic-upload mb-0 justify-content-lg-end">
-																	<div class="new-employee-field">
-																		<div class="mb-0">
-																			<div class="image-upload mb-0">
-																				<input type="file" name="site_logo">
-																				<div class="image-uploads">
-																					<h4><i class="ti ti-upload me-1"></i>Upload Image</h4>
-																				</div>
-																			</div>
-																			<span class="mt-1">Recommended size is 450px x 450px. Max size 5mb.</span>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-xl-3">
-														<div class="new-logo ms-xl-auto">
-															<a href="#">
-																<img src="<?php echo $siteinfo['site_logo'];?>" alt="Logo">
-																<span><i class="ti ti-x"></i></span>
-															</a>
-														</div>
-													</div>
-												
-												
-												</div>
-											</div>
-											<div class="company-address">
-												<div class="card-title-head">
-													<h6 class="fs-16 fw-bold mb-2">
-														<span class="fs-16 me-2"><i class="ti ti-map-pin"></i></span> 
-														Address Information
-													</h6>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="mb-3">
-															<label class="form-label">
-																Address <span class="text-danger">*</span>
-															</label>
-															<input  id="autocomplete" type="text" name="site_address" class="form-control"  value="<?php echo $siteinfo['site_address'];?>">
-														</div>
-													</div>
-												
-												<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            State <span class="text-danger">*</span>
-        </label>
-        <input id="site_state"  readonly  type="text" name="site_state" class="form-control" value="<?php echo $siteinfo['site_state'];?>">
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            City <span class="text-danger">*</span>
-        </label>
-        <input id="site_city" readonly  type="text" name="site_city" class="form-control" value="<?php echo $siteinfo['site_city'];?>">
-    </div>
-</div>
-<input type="hidden" id="site_lon" name="site_lon" value="<?php echo $siteinfo['site_lon']; ?>">
-<input type="hidden" id="site_lat" name="site_lat" value="<?php echo $siteinfo['site_lat']; ?>">
-
-												</div>
-											</div>
+									
+											
 											<div class="text-end settings-bottom-btn mt-0">
 												<button type="button" class="btn btn-secondary me-2">Cancel</button>
 												<button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
@@ -293,7 +197,7 @@ document.querySelector("#siteInfoForm").addEventListener("submit", function(e) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = "Processing...";
 
-    fetch("process/update_siteinfo.php", {
+    fetch("process/update_bank.php", {
         method: "POST",
         body: formData
     })
@@ -327,46 +231,8 @@ document.querySelector("#siteInfoForm").addEventListener("submit", function(e) {
 </script>
 
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $siteinfo['site_map_key'];?>&libraries=places"></script>
-<script>
-let autocomplete;
 
-function initAutocomplete() {
-    const input = document.getElementById('autocomplete');
-    autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        componentRestrictions: { country: 'za' } // Restrict to South Africa
-    });
 
-    autocomplete.addListener('place_changed', fillInAddress);
-}
-
-function fillInAddress() {
-    const place = autocomplete.getPlace();
-    let state = '';
-    let city = '';
-
-    if (place.address_components) {
-        place.address_components.forEach(component => {
-            if (component.types.includes('administrative_area_level_1')) {
-                state = component.long_name;
-            }
-            if (component.types.includes('locality')) {
-                city = component.long_name;
-            }
-        });
-    }
-
-    document.getElementById('site_state').value = state;
-    document.getElementById('site_city').value = city;
-    document.getElementById('site_lat').value = place.geometry.location.lat();
-    document.getElementById('site_lon').value = place.geometry.location.lng();
-	console.log(place.geometry.location.lng());
-	console.log(place.geometry.location.lat());
-}
-
-window.onload = initAutocomplete;
-</script>
         <!-- Feather Icon JS -->
 		<script src="assets/js/feather.min.js" type="e801496cd9c52f594b01b48a-text/javascript"></script>
 

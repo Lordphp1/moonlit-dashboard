@@ -8,6 +8,7 @@
     require_once (__DIR__."/customer_functions.php");
     require_once (__DIR__."/booking_functions.php");
     $siteinfo = getSiteInfo($conn);
+    $sitebank = getSiteBank($conn);
 
 if (!$siteinfo) {
     echo "No site info found.";

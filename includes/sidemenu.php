@@ -194,8 +194,8 @@
 								<li class="submenu">
 									<a href="javascript:void(0);"><i class="ti ti-settings fs-16 me-2"></i><span>General Settings</span><span class="menu-arrow"></span></a>
 									<ul>
-										<li><a href="general-settings.php">Profile</a></li>
-										<li><a href="security-settings.php">Security</a></li>
+										<li><a href="working-hours.php">Working Hours</a></li>
+										<li><a href="bank-account.php">Set Bank Account</a></li>
 									
 									</ul>
 								</li>

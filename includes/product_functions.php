@@ -12,15 +12,15 @@ function cleanDescription($description) {
     return trim($description);
 }
 
-function addProduct($conn, $categoryId, $name, $description, $prices, $admin) {
+function addProduct($conn, $categoryId, $name, $description, $prices,  $max_hours, $admin) {
     try {
         $slug = "PROD-" . rand(100000, 999999);
         $description = cleanDescription($description);
 
         $stmt = $conn->prepare("INSERT INTO " . PRODUCTS . " 
-            (product_unique_id, category_id, product_name, product_description, product_added_by) 
-            VALUES (?,?,?,?,?)");
-        $stmt->bind_param("sissi", $slug, $categoryId, $name, $description, $admin);
+            (product_unique_id, category_id, product_name, product_description, product_added_by,  max_hours) 
+            VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("sissis", $slug, $categoryId, $name, $description, $admin,  $max_hours);
         $stmt->execute();
         $productId = $stmt->insert_id;
         $stmt->close();
@@ -44,14 +44,14 @@ function addProduct($conn, $categoryId, $name, $description, $prices, $admin) {
     }
 }
 
-function updateProduct($conn, $id, $categoryId, $name, $description, $prices, $admin) {
+function updateProduct($conn, $id, $categoryId, $name, $description, $prices,  $max_hours, $admin) {
     try {
         $description = cleanDescription($description);
 
         $stmt = $conn->prepare("UPDATE " . PRODUCTS . " 
-            SET category_id=?, product_name=?, product_description=? 
+            SET category_id=?, product_name=?, product_description=? ,  max_hours = ?
             WHERE id=?");
-        $stmt->bind_param("issi", $categoryId, $name, $description, $id);
+        $stmt->bind_param("isssi", $categoryId, $name, $description, $max_hours,  $id);
         $stmt->execute();
         $stmt->close();
 
@@ -105,7 +105,7 @@ function getProducts($conn) {
 }
 
 function getProductById($conn, $id) {
-    $stmt = $conn->prepare("SELECT p.id, p.product_unique_id, p.product_name, p.product_description,
+    $stmt = $conn->prepare("SELECT p.id, p.product_unique_id, p.product_name, p.max_hours,  p.product_description,
                                    p.category_id, c.category_name, a.username AS addedby
                             FROM " . PRODUCTS . " p
                             JOIN " . CAT . " c ON p.category_id = c.category_id

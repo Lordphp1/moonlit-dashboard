@@ -102,144 +102,180 @@ include "../../includes/session.php";
 							</li>
 						</ul>
 					</div>
-					
-					<div class="card">
-						<div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-							<div class="search-set">
-								<div class="search-input">
-									<span class="btn-searchset"><i class="ti ti-search fs-14 feather-search"></i></span>
-								</div>
-							</div>
-							<div class="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-								<div class="dropdown me-2">
-									<a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
-										Customer
-									</a>
-									<ul class="dropdown-menu  dropdown-menu-end p-3">
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Carl Evans</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Minerva Rameriz</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Robert Lamon</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Patricia Lewis</a>
-										</li>
-									</ul>
-								</div>
-								<div class="dropdown me-2">
-									<a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
-										Status
-									</a>
-									<ul class="dropdown-menu  dropdown-menu-end p-3">
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Paid</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Unpaid</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Overdue</a>
-										</li>
-									</ul>
-								</div>
-								<div class="dropdown">
-									<a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
-										Sort By : Last 7 Days
-									</a>
-									<ul class="dropdown-menu  dropdown-menu-end p-3">
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Desending</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Last Month</a>
-										</li>
-										<li>
-											<a href="javascript:void(0);" class="dropdown-item rounded-1">Last 7 Days</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="card-body p-0">
-							<div class="table-responsive">
-								<table class="table datatable">
-  <thead class="thead-light">
-    <tr>
-      <th class="no-sort">
-        <label class="checkboxs">
-          <input type="checkbox" id="select-all" />
-          <span class="checkmarks"></span>
-        </label>
-      </th>
-      <th>Invoice No</th>
-      <th>Customer</th>
-      <th>Car Type</th>
-      <th>Amount</th>
-      <th>Product</th>
-      <th>Status</th>
-      <th class="no-sort"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $bookings = getAllBookings($conn); // 🔹 function to fetch all bookings
-    if (!empty($bookings)):
-      foreach ($bookings as $booking): ?>
-        <tr>
-          <td>
-            <label class="checkboxs">
-              <input type="checkbox" />
-              <span class="checkmarks"></span>
-            </label>
-          </td>
-          <td><a href="invoice-details.php?id=<?php echo $booking['id']; ?>">INV<?php echo str_pad($booking['id'], 3, '0', STR_PAD_LEFT); ?></a></td>
-          <td>
-            <div class="d-flex align-items-center">
+				   
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+        <div class="search-set">
+            <div class="search-input">
+                <span class="btn-searchset"><i class="ti ti-search fs-14 feather-search"></i></span>
+            </div>
+        </div>
+        <div class="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+            <!-- Filter: Payment Status -->
+            <div class="dropdown me-2">
+                <a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                    Payment Status
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3">
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-payment" data-status="all">All</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-payment" data-status="paid">Paid</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-payment" data-status="unpaid">Unpaid</a></li>
+                </ul>
+            </div>
             
-              <a href="javascript:void(0);"><?php echo htmlspecialchars($booking['customer_name']); ?></a>
+            <!-- Filter: Wash Status -->
+            <div class="dropdown me-2">
+                <a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                    Wash Status
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3">
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-wash" data-status="all">All</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-wash" data-status="pending">Pending</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 filter-wash" data-status="completed">Completed</a></li>
+                </ul>
             </div>
-          </td>
-          <td><?php echo htmlspecialchars($booking['car_type']); ?></td>
-          <td>₦<?php echo number_format($booking['price'], 2); ?></td>
-          <td><?php echo htmlspecialchars($booking['product_name']); ?></td>
-          <td>
-            <?php if ($booking['payment_status'] === "paid"): ?>
-              <span class="badge badge-soft-success badge-xs shadow-none"><i class="ti ti-point-filled me-1"></i>Paid</span>
-            <?php else: ?>
-              <span class="badge badge-soft-danger badge-xs shadow-none"><i class="ti ti-point-filled me-1"></i>Unpaid</span>
-            <?php endif; ?>
-          </td>
-          <td class="d-flex">
-            <div class="edit-delete-action d-flex align-items-center justify-content-center">
-              <a class="me-2 p-2 d-flex align-items-center justify-content-between border rounded"
-                 href="invoice-details.php?id=<?php echo $booking['id']; ?>">
-                <i data-feather="eye" class="feather-eye"></i>
-              </a>
-              <a class="p-2 d-flex align-items-center justify-content-between border rounded deleteTrigger"
-                 href="javascript:void(0);"
-                 data-id="<?php echo $booking['id']; ?>"
-                 data-bs-toggle="modal"
-                 data-bs-target="#delete-modal">
-                <i data-feather="trash-2" class="feather-trash-2"></i>
-              </a>
+            
+            <!-- Sort -->
+            <div class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                    Sort By
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3">
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 sort-by" data-sort="recent">Recently Added</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 sort-by" data-sort="oldest">Oldest First</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 sort-by" data-sort="amount-high">Amount: High to Low</a></li>
+                    <li><a href="javascript:void(0);" class="dropdown-item rounded-1 sort-by" data-sort="amount-low">Amount: Low to High</a></li>
+                </ul>
             </div>
-          </td>
-        </tr>
-      <?php endforeach;
-    else: ?>
-      <tr><td colspan="9" class="text-center">No bookings found</td></tr>
-    <?php endif; ?>
-  </tbody>
+        </div>
+    </div>
+    
+
+             <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table datatable" id="invoiceTable">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="no-sort">
+                            <label class="checkboxs">
+                                <input type="checkbox" id="select-all" />
+                                <span class="checkmarks"></span>
+                            </label>
+                        </th>
+                        <th>Invoice No</th>
+                        <th>Customer</th>
+                        <th>Car Type</th>
+                        <th>Base Amount</th>
+                        <th>Callout Fee</th>
+                        <th>Total Amount</th>
+                        <th>Product</th>
+                        <th>Payment Status</th>
+                        <th>Wash Status</th>
+                        <th class="no-sort">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $bookings = getAllBookings($conn);
+                    if (!empty($bookings)):
+                        foreach ($bookings as $booking): 
+                            $baseAmount = floatval($booking['price']) - floatval($booking['callout_fee'] ?? 0);
+                            $calloutFee = floatval($booking['callout_fee'] ?? 0);
+                            $totalAmount = floatval($booking['price']);
+                            $washStatus = $booking['washing_status'] ?? 'pending';
+                    ?>
+                        <tr data-payment="<?php echo $booking['payment_status']; ?>" 
+                            data-wash="<?php echo $washStatus; ?>"
+                            data-amount="<?php echo $totalAmount; ?>"
+                            data-date="<?php echo strtotime($booking['created_at'] ?? date('Y-m-d')); ?>">
+                            <td>
+                                <label class="checkboxs">
+                                    <input type="checkbox" />
+                                    <span class="checkmarks"></span>
+                                </label>
+                            </td>
+                            <td>
+                                <a href="invoice-details.php?id=<?php echo $booking['id']; ?>">
+                                    INV<?php echo str_pad($booking['id'], 3, '0', STR_PAD_LEFT); ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);"><?php echo htmlspecialchars($booking['customer_name']); ?></a>
+                            </td>
+                            <td><?php echo htmlspecialchars($booking['car_type']); ?></td>
+                            <td><?php echo $siteinfo['site_currency']." ".number_format($baseAmount, 2); ?></td>
+                            <td>
+                                <?php if ($calloutFee > 0): ?>
+                                    <span class="badge badge-soft-info badge-xs">
+                                        <?php echo $siteinfo['site_currency']." ".number_format($calloutFee, 2); ?>
+                                    </span>
+                                <?php else: ?>
+                                    <span class="text-muted">-</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><strong><?php echo $siteinfo['site_currency']." ".number_format($totalAmount, 2); ?></strong></td>
+                            <td><?php echo htmlspecialchars($booking['product_name']); ?></td>
+                            <td>
+                                <?php if ($booking['payment_status'] === "paid"): ?>
+                                    <span class="badge badge-soft-success badge-xs shadow-none">
+                                        <i class="ti ti-point-filled me-1"></i>Paid
+                                    </span>
+                                <?php else: ?>
+                                    <span class="badge badge-soft-danger badge-xs shadow-none">
+                                        <i class="ti ti-point-filled me-1"></i>Unpaid
+                                    </span>
+                                    <a href="javascript:void(0);" 
+                                       class="ms-2 text-success update-payment-status" 
+                                       data-id="<?php echo $booking['id']; ?>"
+                                       title="Mark as Paid">
+                                        <i class="ti ti-circle-check fs-18"></i>
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if ($washStatus === "completed"): ?>
+                                    <span class="badge badge-soft-success badge-xs shadow-none">
+                                        <i class="ti ti-point-filled me-1"></i>Completed
+                                    </span>
+                                <?php else: ?>
+                                    <span class="badge badge-soft-warning badge-xs shadow-none">
+                                        <i class="ti ti-point-filled me-1"></i>Pending
+                                    </span>
+                                    <a href="javascript:void(0);" 
+                                       class="ms-2 text-primary update-wash-status" 
+                                       data-id="<?php echo $booking['id']; ?>"
+                                       title="Mark as Completed">
+                                        <i class="ti ti-checks fs-18"></i>
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <div class="edit-delete-action d-flex align-items-center justify-content-center">
+                                    <a class="me-2 p-2 d-flex align-items-center justify-content-between border rounded"
+                                       href="invoice-details.php?id=<?php echo $booking['id']; ?>">
+                                        <i data-feather="eye" class="feather-eye"></i>
+                                    </a>
+                                    <a class="p-2 d-flex align-items-center justify-content-between border rounded deleteTrigger"
+                                       href="javascript:void(0);"
+                                       data-id="<?php echo $booking['id']; ?>"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#delete-modal">
+                                        <i data-feather="trash-2" class="feather-trash-2"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach;
+                    else: ?>
+                        <tr><td colspan="11" class="text-center">No bookings found</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
 </table>
 
 							</div>
@@ -289,6 +325,80 @@ include "../../includes/session.php";
         </div>
       </div>
     </div>
+<!-- ✅ Mark as Paid Modal -->
+<div class="modal fade" id="markPaidModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="page-wrapper-new p-0">
+        <div class="content p-5 px-3 text-center">
+          <span class="rounded-circle d-inline-flex p-2 bg-success-transparent mb-2">
+            <i class="ti ti-circle-check fs-24 text-success"></i>
+          </span>
+          <h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">
+            Mark Invoice as Paid
+          </h4>
+          <p class="text-gray-6 mb-0 fs-16">
+            Are you sure you want to mark this invoice as <strong>Paid</strong>?
+          </p>
+          <div class="modal-footer-btn mt-3 d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-success fs-13 fw-medium p-2 px-3 markPaidBtn"
+            >
+              Yes, Mark Paid
+            </button>
+            <input id="invoiceToMarkPaid" type="hidden" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ✅ Complete Wash Modal -->
+<div class="modal fade" id="completeWashModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="page-wrapper-new p-0">
+        <div class="content p-5 px-3 text-center">
+          <span class="rounded-circle d-inline-flex p-2 bg-primary-transparent mb-2">
+            <i class="ti ti-checks fs-24 text-primary"></i>
+          </span>
+          <h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">
+            Mark Wash as Completed
+          </h4>
+          <p class="text-gray-6 mb-0 fs-16">
+            Are you sure you want to mark this wash as completed?
+          </p>
+          <div class="modal-footer-btn mt-3 d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary fs-13 fw-medium p-2 px-3 completeWashBtn"
+            >
+              Yes, Mark Completed
+            </button>
+            <input id="washToComplete" type="hidden" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 		 <!-- Toast Container (top-right corner) -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
   <div id="toastMessage" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -302,82 +412,243 @@ include "../../includes/session.php";
 </div>
 		<!-- jQuery -->
         <script src="assets/js/jquery-3.7.1.min.js" type="3027f72734665fe206ae152a-text/javascript"></script>
+
+
 <script>
-	
 document.addEventListener("DOMContentLoaded", () => {
-  const deleteModal = document.getElementById("delete-modal");
-  const deleteBtn = deleteModal.querySelector(".deleteBtn");
-  const itemInput = document.getElementById("itemToDelete");
-  let isDeleting = false; // 🔹 Prevent double submission
+    const table = $('#invoiceTable').DataTable({
+        "order": [[1, "desc"]], // Sort by Invoice No (newest first)
+        "columnDefs": [
+            { "orderable": false, "targets": [0, 10] }
+        ]
+    });
 
-  // Use event delegation on parent table (prevents duplication)
-  document.querySelector('.table.datatable tbody').addEventListener("click", function(e) {
-    const deleteTrigger = e.target.closest(".deleteTrigger");
-    if (deleteTrigger) {
-      e.preventDefault(); // 🔹 Stop event propagation
-      const id = deleteTrigger.getAttribute("data-id");
-      itemInput.value = id;
-    }
-  });
-
-  // Confirm deletion (with safeguard)
-  deleteBtn.addEventListener("click", function (e) {
-    e.preventDefault(); // 🔹 Prevent form submission
+    // ========== FILTERING ==========
     
-    if (isDeleting) return; // 🔹 Already processing, ignore
+    // Payment Status Filter
+    document.querySelectorAll('.filter-payment').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const status = this.dataset.status;
+            
+            if (status === 'all') {
+                table.column(8).search('').draw();
+            } else {
+                table.column(8).search(status).draw();
+            }
+        });
+    });
     
-    const id = itemInput.value;
-    if (!id) return showToast("error", "No record selected!");
+    // Wash Status Filter
+    document.querySelectorAll('.filter-wash').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const status = this.dataset.status;
+            
+            if (status === 'all') {
+                table.column(9).search('').draw();
+            } else {
+                table.column(9).search(status).draw();
+            }
+        });
+    });
+    
+    // ========== SORTING ==========
+    
+    document.querySelectorAll('.sort-by').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sortType = this.dataset.sort;
+            
+            switch(sortType) {
+                case 'recent':
+                    table.order([1, 'desc']).draw();
+                    break;
+                case 'oldest':
+                    table.order([1, 'asc']).draw();
+                    break;
+                case 'amount-high':
+                    table.order([6, 'desc']).draw();
+                    break;
+                case 'amount-low':
+                    table.order([6, 'asc']).draw();
+                    break;
+            }
+        });
+    });
 
-    isDeleting = true; // 🔹 Lock deletion
-    deleteBtn.disabled = true;
-    deleteBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Deleting...`;
+    // ========== UPDATE PAYMENT STATUS ==========
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.update-payment-status');
+  if (!btn) return;
 
-    fetch("process/booking_process.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ action: "delete_booking", id }),
+  e.preventDefault();
+
+  const invoiceId = btn.dataset.id;
+  const markPaidModal = new bootstrap.Modal(document.getElementById('markPaidModal'));
+  const hiddenInput = document.getElementById('invoiceToMarkPaid');
+  hiddenInput.value = invoiceId;
+
+  markPaidModal.show();
+
+  const confirmBtn = document.querySelector('#markPaidModal .markPaidBtn');
+  confirmBtn.onclick = function () {
+    confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+    confirmBtn.disabled = true;
+
+    fetch('process/update_status.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        action: 'update_payment_status',
+        id: invoiceId,
+        status: 'paid'
+      })
     })
       .then(res => res.json())
       .then(data => {
-        if (data.status === "success") {
-          showToast("success", data.message || "Booking deleted!");
-          // Remove row from table
-          const row = document.querySelector(`.deleteTrigger[data-id="${id}"]`)?.closest("tr");
-          if (row) row.remove();
-          
-          // Close modal
-          const modalInstance = bootstrap.Modal.getInstance(deleteModal);
-          if (modalInstance) modalInstance.hide();
+        if (data.status === 'success') {
+          showToast('success', 'Payment status updated to Paid!');
+          markPaidModal.hide();
+          setTimeout(() => location.reload(), 1000);
         } else {
-          showToast("error", data.message || "Failed to delete booking!");
+          showToast('error', data.message || 'Failed to update status');
+          confirmBtn.innerHTML = 'Yes, Mark Paid';
+          confirmBtn.disabled = false;
         }
       })
-      .catch(() => showToast("error", "Something went wrong!"))
-      .finally(() => {
-        isDeleting = false; // 🔹 Unlock deletion
-        deleteBtn.disabled = false;
-        deleteBtn.innerHTML = "Yes Delete";
+      .catch(() => {
+        showToast('error', 'Something went wrong!');
+        confirmBtn.innerHTML = 'Yes, Mark Paid';
+        confirmBtn.disabled = false;
       });
-  }, { once: false }); // 🔹 Don't remove listener after first click
-
-  // Toast helper
-  function showToast(type, message) {
-    const bg = type === "success" ? "bg-success" : "bg-danger";
-    const toast = document.createElement("div");
-    toast.className = `toast align-items-center text-white ${bg} border-0 position-fixed bottom-0 end-0 m-3 show`;
-    toast.role = "alert";
-    toast.style.zIndex = "9999";
-    toast.innerHTML = `
-      <div class="d-flex">
-        <div class="toast-body">${message}</div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-      </div>`;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-  }
+  };
 });
 
+    // ========== UPDATE WASH STATUS ==========
+    
+  document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.update-wash-status');
+  if (!btn) return;
+
+  e.preventDefault();
+
+  const washId = btn.dataset.id;
+  const completeModal = new bootstrap.Modal(document.getElementById('completeWashModal'));
+  const hiddenInput = document.getElementById('washToComplete');
+  hiddenInput.value = washId;
+
+  completeModal.show();
+
+  const confirmBtn = document.querySelector('#completeWashModal .completeWashBtn');
+  confirmBtn.onclick = function () {
+    confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+    confirmBtn.disabled = true;
+
+    fetch('process/update_status.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        action: 'update_wash_status',
+        id: washId,
+        status: 'completed'
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          showToast('success', 'Wash status updated to Completed!');
+          completeModal.hide();
+          setTimeout(() => location.reload(), 1000);
+        } else {
+          showToast('error', data.message || 'Failed to update status');
+          confirmBtn.innerHTML = 'Yes, Mark Completed';
+          confirmBtn.disabled = false;
+        }
+      })
+      .catch(() => {
+        showToast('error', 'Something went wrong!');
+        confirmBtn.innerHTML = 'Yes, Mark Completed';
+        confirmBtn.disabled = false;
+      });
+  };
+});
+
+
+    // ========== DELETE BOOKING ==========
+    
+    const deleteModal = document.getElementById("delete-modal");
+    const deleteBtn = deleteModal.querySelector(".deleteBtn");
+    const itemInput = document.getElementById("itemToDelete");
+    let isDeleting = false;
+
+    document.querySelector('.table.datatable tbody').addEventListener("click", function(e) {
+        const deleteTrigger = e.target.closest(".deleteTrigger");
+        if (deleteTrigger) {
+            e.preventDefault();
+            const id = deleteTrigger.getAttribute("data-id");
+            itemInput.value = id;
+        }
+    });
+
+    deleteBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        
+        if (isDeleting) return;
+        
+        const id = itemInput.value;
+        if (!id) return showToast("error", "No record selected!");
+
+        isDeleting = true;
+        deleteBtn.disabled = true;
+        deleteBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Deleting...`;
+
+        fetch("process/booking_process.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ action: "delete_booking", id }),
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "success") {
+                showToast("success", data.message || "Booking deleted!");
+                const row = document.querySelector(`.deleteTrigger[data-id="${id}"]`)?.closest("tr");
+                if (row) {
+                    table.row(row).remove().draw();
+                }
+                const modalInstance = bootstrap.Modal.getInstance(deleteModal);
+                if (modalInstance) modalInstance.hide();
+            } else {
+                showToast("error", data.message || "Failed to delete booking!");
+            }
+        })
+        .catch(() => showToast("error", "Something went wrong!"))
+        .finally(() => {
+            isDeleting = false;
+            deleteBtn.disabled = false;
+            deleteBtn.innerHTML = "Yes Delete";
+        });
+    });
+
+    // ========== TOAST HELPER ==========
+    
+    function showToast(type, message) {
+        const bg = type === "success" ? "bg-success" : "bg-danger";
+        const toast = document.createElement("div");
+        toast.className = `toast align-items-center text-white ${bg} border-0 position-fixed bottom-0 end-0 m-3 show`;
+        toast.role = "alert";
+        toast.style.zIndex = "9999";
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    window.showToast = showToast;
+});
 </script>
 
         <!-- Feather Icon JS -->

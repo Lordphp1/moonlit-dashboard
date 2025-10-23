@@ -103,73 +103,18 @@ include "../../includes/session.php";
 							 
 								<div class="card flex-fill mb-0">
 									<div class="card-header">
-										<h4 class="fs-18 fw-bold">Company Settings</h4>
+										<h4 class="fs-18 fw-bold">Admin Settings</h4>
 									</div>
 									<div class="card-body">
 										<form id="siteInfoForm" enctype="multipart/form-data">
 
-											<div class="border-bottom mb-3">
-												<div class="card-title-head">
-													<h6 class="fs-16 fw-bold mb-2">
-														<span class="fs-16 me-2"><i class="ti ti-building"></i></span> 
-														Company Information
-													</h6>
-												</div>
-												<div class="row">
-															<div class="col-xl-6 col-lg-6 col-md-6">
-														<div class="mb-3">
-															<label class="form-label">
-																Company Currency  <span class="text-danger">*</span>
-															</label>
-															<input type="text" class="form-control"
-															 value="<?php echo $siteinfo['site_currency'];?>" name="site_currency">
-														</div>
-													</div>
-													<div class="col-xl-6 col-lg-6 col-md-6">
-														<div class="mb-3">
-															<label class="form-label">
-																Price Per Millage<span class="text-danger">*</span>
-															</label>
-															<input type="text" name="site_millage_price" class="form-control"  value="<?php echo $siteinfo['site_mileage_price'];?>">
-														</div>
-													</div>
-												</div>
-												<div class="row">
-											
-													<div class="col-xl-4 col-lg-6 col-md-4">
-														<div class="mb-3">
-															<label class="form-label">
-																Company Name  <span class="text-danger">*</span>
-															</label>
-															<input type="text" class="form-control"
-															 value="<?php echo $siteinfo['site_name'];?>" name="site_name">
-														</div>
-													</div>
-													<div class="col-xl-4 col-lg-6 col-md-4">
-														<div class="mb-3">
-															<label class="form-label">
-																Company Email Address  <span class="text-danger">*</span>
-															</label>
-															<input type="email" name="site_email" class="form-control"  value="<?php echo $siteinfo['site_email'];?>">
-														</div>
-													</div>
-													<div class="col-md-4">
-														<div class="mb-3">
-															<label class="form-label">
-																Phone Number <span class="text-danger">*</span>
-															</label>
-															<input type="text" name="site_phone" class="form-control"  value="<?php echo $siteinfo['site_phone'];?>">
-														</div>
-													</div>
-											
-												
-												</div>
-											</div>
+										
+              
 											<div class="border-bottom mb-3 pb-3">
 												<div class="card-title-head">
 													<h6 class="fs-16 fw-bold mb-2">
 														<span class="fs-16 me-2"><i class="ti ti-photo"></i></span> 
-														Company Logo
+														SIgnature image
 													</h6>
 												</div>
 												<div class="row align-items-center gy-3">
@@ -177,8 +122,8 @@ include "../../includes/session.php";
 														<div class="row gy-3 align-items-center">
 															<div class="col-lg-4">
 																<div class="logo-info">
-																	<h6 class="fw-medium">Company Icon</h6>
-																	<p>Upload Icon of your Company</p>
+																	<h6 class="fw-medium">Signature photo</h6>
+																	<p>Upload Icon of your signatature</p>
 																</div>
 															</div>
 															<div class="col-lg-8">
@@ -186,7 +131,7 @@ include "../../includes/session.php";
 																	<div class="new-employee-field">
 																		<div class="mb-0">
 																			<div class="image-upload mb-0">
-																				<input type="file" name="site_logo">
+																				<input type="file" name="admin_signature">
 																				<div class="image-uploads">
 																					<h4><i class="ti ti-upload me-1"></i>Upload Image</h4>
 																				</div>
@@ -201,7 +146,7 @@ include "../../includes/session.php";
 													<div class="col-xl-3">
 														<div class="new-logo ms-xl-auto">
 															<a href="#">
-																<img src="<?php echo $siteinfo['site_logo'];?>" alt="Logo">
+																<img src="<?php echo $admin['signature_url'];?>" alt="Logo">
 																<span><i class="ti ti-x"></i></span>
 															</a>
 														</div>
@@ -210,44 +155,60 @@ include "../../includes/session.php";
 												
 												</div>
 											</div>
-											<div class="company-address">
+									
+                      
+											<div class="text-end settings-bottom-btn mt-0">
+												<button type="button" class="btn btn-secondary me-2">Cancel</button>
+												<button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
+											</div>
+										</form>
+
+                    		<form id="passwordForm" enctype="multipart/form-data" class="mt-3">
+
+											<div class="border-bottom mb-3">
 												<div class="card-title-head">
 													<h6 class="fs-16 fw-bold mb-2">
-														<span class="fs-16 me-2"><i class="ti ti-map-pin"></i></span> 
-														Address Information
+														<span class="fs-16 me-2"><i class="ti ti-key"></i></span> 
+														Password setting
 													</h6>
 												</div>
+									
+                        
 												<div class="row">
-													<div class="col-md-12">
+											
+													<div class="col-xl-4 col-lg-6 col-md-4">
 														<div class="mb-3">
 															<label class="form-label">
-																Address <span class="text-danger">*</span>
+																Old Password  <span class="text-danger">*</span>
 															</label>
-															<input  id="autocomplete" type="text" name="site_address" class="form-control"  value="<?php echo $siteinfo['site_address'];?>">
+															<input type="password" class="form-control"
+															 value="" name="old_password">
 														</div>
 													</div>
+													<div class="col-xl-4 col-lg-6 col-md-4">
+														<div class="mb-3">
+															<label class="form-label">
+																New Password  <span class="text-danger">*</span>
+															</label>
+															<input type="password" name="new_password" class="form-control" >
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="mb-3">
+															<label class="form-label">
+																Retype New Password <span class="text-danger">*</span>
+															</label>
+															<input type="password" name="confirm_password" class="form-control" >
+														</div>
+													</div>
+											
 												
-												<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            State <span class="text-danger">*</span>
-        </label>
-        <input id="site_state"  readonly  type="text" name="site_state" class="form-control" value="<?php echo $siteinfo['site_state'];?>">
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            City <span class="text-danger">*</span>
-        </label>
-        <input id="site_city" readonly  type="text" name="site_city" class="form-control" value="<?php echo $siteinfo['site_city'];?>">
-    </div>
-</div>
-<input type="hidden" id="site_lon" name="site_lon" value="<?php echo $siteinfo['site_lon']; ?>">
-<input type="hidden" id="site_lat" name="site_lat" value="<?php echo $siteinfo['site_lat']; ?>">
-
 												</div>
 											</div>
+								
+                      
+									
+                      
 											<div class="text-end settings-bottom-btn mt-0">
 												<button type="button" class="btn btn-secondary me-2">Cancel</button>
 												<button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
@@ -293,7 +254,42 @@ document.querySelector("#siteInfoForm").addEventListener("submit", function(e) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = "Processing...";
 
-    fetch("process/update_siteinfo.php", {
+    fetch("process/update_signature.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+			                    showToast(data.message, "success");
+
+        } else {
+			                    showToast(data.message, "error");
+
+        }
+    })
+    .catch(() => toastr.error("Something went wrong!"))
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    });
+
+	
+});
+
+document.querySelector("#passwordForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let form = this;
+    let formData = new FormData(form);
+    let submitBtn = document.querySelector("#saveBtn");
+    let originalText = submitBtn.innerHTML;
+
+    // Show processing
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Processing...";
+
+    fetch("process/update_password.php", {
         method: "POST",
         body: formData
     })
@@ -327,46 +323,6 @@ document.querySelector("#siteInfoForm").addEventListener("submit", function(e) {
 </script>
 
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $siteinfo['site_map_key'];?>&libraries=places"></script>
-<script>
-let autocomplete;
-
-function initAutocomplete() {
-    const input = document.getElementById('autocomplete');
-    autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        componentRestrictions: { country: 'za' } // Restrict to South Africa
-    });
-
-    autocomplete.addListener('place_changed', fillInAddress);
-}
-
-function fillInAddress() {
-    const place = autocomplete.getPlace();
-    let state = '';
-    let city = '';
-
-    if (place.address_components) {
-        place.address_components.forEach(component => {
-            if (component.types.includes('administrative_area_level_1')) {
-                state = component.long_name;
-            }
-            if (component.types.includes('locality')) {
-                city = component.long_name;
-            }
-        });
-    }
-
-    document.getElementById('site_state').value = state;
-    document.getElementById('site_city').value = city;
-    document.getElementById('site_lat').value = place.geometry.location.lat();
-    document.getElementById('site_lon').value = place.geometry.location.lng();
-	console.log(place.geometry.location.lng());
-	console.log(place.geometry.location.lat());
-}
-
-window.onload = initAutocomplete;
-</script>
         <!-- Feather Icon JS -->
 		<script src="assets/js/feather.min.js" type="e801496cd9c52f594b01b48a-text/javascript"></script>
 

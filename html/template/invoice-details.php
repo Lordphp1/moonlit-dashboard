@@ -88,13 +88,13 @@ include "../../includes/session.php";
         <div class="main-header">
           <!-- Logo -->
           <div class="header-left active">
-            <a href="index.html" class="logo logo-normal">
+            <a href="index.php" class="logo logo-normal">
               <img src="assets/img/logo.svg" alt="Img" />
             </a>
-            <a href="index.html" class="logo logo-white">
+            <a href="index.php" class="logo logo-white">
               <img src="assets/img/logo-white.svg" alt="Img" />
             </a>
-            <a href="index.html" class="logo-small">
+            <a href="index.php" class="logo-small">
               <img src="assets/img/logo-small.png" alt="Img" />
             </a>
           </div>
@@ -276,7 +276,7 @@ include "../../includes/session.php";
               <div class="dropdown-menu dropdown-xl dropdown-menu-center">
                 <div class="row g-2">
                   <div class="col-md-2">
-                    <a href="category-list.html" class="link-item">
+                    <a href="category-list.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-brand-codepen"></i>
                       </span>
@@ -284,7 +284,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="add-product.html" class="link-item">
+                    <a href="add-product.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-square-plus"></i>
                       </span>
@@ -292,7 +292,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="category-list.html" class="link-item">
+                    <a href="category-list.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-shopping-bag"></i>
                       </span>
@@ -300,7 +300,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="online-orders.html" class="link-item">
+                    <a href="online-orders.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-shopping-cart"></i>
                       </span>
@@ -308,7 +308,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="expense-list.html" class="link-item">
+                    <a href="expense-list.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-file-text"></i>
                       </span>
@@ -316,7 +316,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="quotation-list.html" class="link-item">
+                    <a href="quotation-list.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-device-floppy"></i>
                       </span>
@@ -324,7 +324,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="sales-returns.html" class="link-item">
+                    <a href="sales-returns.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-copy"></i>
                       </span>
@@ -332,7 +332,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="users.html" class="link-item">
+                    <a href="users.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-user"></i>
                       </span>
@@ -340,7 +340,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="customers.html" class="link-item">
+                    <a href="customers.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-users"></i>
                       </span>
@@ -348,7 +348,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="sales-report.html" class="link-item">
+                    <a href="sales-report.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-shield"></i>
                       </span>
@@ -356,7 +356,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="suppliers.html" class="link-item">
+                    <a href="suppliers.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-user-check"></i>
                       </span>
@@ -364,7 +364,7 @@ include "../../includes/session.php";
                     </a>
                   </div>
                   <div class="col-md-2">
-                    <a href="stock-transfer.html" class="link-item">
+                    <a href="stock-transfer.php" class="link-item">
                       <span class="link-icon">
                         <i class="ti ti-truck"></i>
                       </span>
@@ -377,7 +377,7 @@ include "../../includes/session.php";
 
             <li class="nav-item pos-nav">
               <a
-                href="pos.html"
+                href="pos.php"
                 class="btn btn-dark btn-md d-inline-flex align-items-center"
               >
                 <i class="ti ti-device-laptop me-1"></i>POS
@@ -423,7 +423,7 @@ include "../../includes/session.php";
               </a>
             </li>
             <li class="nav-item nav-item-box">
-              <a href="email.html">
+              <a href="email.php">
                 <i class="ti ti-mail"></i>
                 <span class="badge rounded-pill">1</span>
               </a>
@@ -447,7 +447,7 @@ include "../../includes/session.php";
                 <div class="noti-content">
                   <ul class="notification-list">
                     <li class="notification-message">
-                      <a href="activities.html">
+                      <a href="activities.php">
                         <div class="media d-flex">
                           <span class="avatar flex-shrink-0">
                             <img
@@ -467,7 +467,7 @@ include "../../includes/session.php";
                       </a>
                     </li>
                     <li class="notification-message">
-                      <a href="activities.html">
+                      <a href="activities.php">
                         <div class="media d-flex">
                           <span class="avatar flex-shrink-0">
                             <img
@@ -486,7 +486,7 @@ include "../../includes/session.php";
                       </a>
                     </li>
                     <li class="notification-message">
-                      <a href="activities.html" class="recent-msg">
+                      <a href="activities.php" class="recent-msg">
                         <div class="media d-flex">
                           <span class="avatar flex-shrink-0">
                             <img
@@ -505,7 +505,7 @@ include "../../includes/session.php";
                       </a>
                     </li>
                     <li class="notification-message">
-                      <a href="activities.html" class="recent-msg">
+                      <a href="activities.php" class="recent-msg">
                         <div class="media d-flex">
                           <span class="avatar flex-shrink-0">
                             <img
@@ -530,7 +530,7 @@ include "../../includes/session.php";
                   class="topnav-dropdown-footer d-flex align-items-center gap-3"
                 >
                   <a href="#" class="btn btn-secondary btn-md w-100">Cancel</a>
-                  <a href="activities.html" class="btn btn-primary btn-md w-100"
+                  <a href="activities.php" class="btn btn-primary btn-md w-100"
                     >View all</a
                   >
                 </div>
@@ -539,7 +539,7 @@ include "../../includes/session.php";
             <!-- /Notifications -->
 
             <li class="nav-item nav-item-box">
-              <a href="general-settings.html"><i class="ti ti-settings"></i></a>
+              <a href="general-settings.php"><i class="ti ti-settings"></i></a>
             </li>
             <li class="nav-item dropdown has-arrow main-drop profile-nav">
               <a
@@ -567,17 +567,17 @@ include "../../includes/session.php";
                     <p>Admin</p>
                   </div>
                 </div>
-                <a class="dropdown-item" href="profile.html"
+                <a class="dropdown-item" href="profile.php"
                   ><i class="ti ti-user-circle me-2"></i>MyProfile</a
                 >
-                <a class="dropdown-item" href="sales-report.html"
+                <a class="dropdown-item" href="sales-report.php"
                   ><i class="ti ti-file-text me-2"></i>Reports</a
                 >
-                <a class="dropdown-item" href="general-settings.html"
+                <a class="dropdown-item" href="general-settings.php"
                   ><i class="ti ti-settings-2 me-2"></i>Settings</a
                 >
                 <hr class="my-2" />
-                <a class="dropdown-item logout pb-0" href="signin.html"
+                <a class="dropdown-item logout pb-0" href="signin.php"
                   ><i class="ti ti-logout me-2"></i>Logout</a
                 >
               </div>
@@ -595,9 +595,9 @@ include "../../includes/session.php";
               ><i class="fa fa-ellipsis-v"></i
             ></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
-              <a class="dropdown-item" href="general-settings.html">Settings</a>
-              <a class="dropdown-item" href="signin.html">Logout</a>
+              <a class="dropdown-item" href="profile.php">My Profile</a>
+              <a class="dropdown-item" href="general-settings.php">Settings</a>
+              <a class="dropdown-item" href="signin.php">Logout</a>
             </div>
           </div>
           <!-- /Mobile Menu -->
@@ -627,30 +627,20 @@ include "../../includes/session.php";
             </div>
             <ul class="table-top-head">
               <li>
-                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"
-                  ><img src="assets/img/icons/pdf.svg" alt="img"
-                /></a>
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Print"
-                  ><i data-feather="printer" class="feather-rotate-ccw"></i
-                ></a>
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Collapse"
-                  id="collapse-header"
-                  ><i class="ti ti-chevron-up"></i
-                ></a>
-              </li>
+    <a href="#" class="action-btn" data-action="pdf" data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf">
+      <img src="assets/img/icons/pdf.svg" alt="img" />
+    </a>
+  </li>
+  <li>
+    <a href="#" class="action-btn" data-action="print" data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+      <i data-feather="printer" class="feather-rotate-ccw"></i>
+    </a>
+  </li>
+           
+              
             </ul>
             <div class="page-btn">
-              <a href="invoice.html" class="btn btn-primary"
+              <a href="invoice.php" class="btn btn-primary"
                 ><i data-feather="arrow-left" class="me-2"></i>Back to
                 Invoices</a
               >
@@ -663,7 +653,7 @@ include "../../includes/session.php";
 
     if ($booking) {
         echo "<pre>";
-        print_r($booking);
+
         echo "</pre>";
     } else {
         echo "Booking not found.";
@@ -672,9 +662,13 @@ include "../../includes/session.php";
     header("Location: index.php");
     exit;
 }
-  ?>
+  ?><?php
+$totalAmount = $booking['price'] + $booking['callout_fee'];
+$amountInWords = numberToWords($totalAmount);
+?>
+
           <!-- Invoices -->
-          <div class="card">
+          <div class="card" id="invoice-section">
             <div class="card-body">
               <div
                 class="row justify-content-between align-items-center border-bottom mb-3"
@@ -707,54 +701,58 @@ include "../../includes/session.php";
                 <div class="col-md-5">
                   <p class="text-dark mb-2 fw-semibold">From</p>
                   <div>
-                    <h4 class="mb-1">Thomas Lawler</h4>
-                    <p class="mb-1">2077 Chicago Avenue Orosi, CA 93647</p>
+                    <h4 class="mb-1"><?php echo ucfirst($siteinfo['site_name']);?></h4>
+                    <p class="mb-1"><?php echo ucfirst($siteinfo['site_address']);?></p>
                     <p class="mb-1">
                       Email :
                       <span class="text-dark"
                         ><a
-                          href="https://dreamspos.dreamstechnologies.com/cdn-cgi/l/email-protection"
-                          class="__cf_email__"
-                          data-cfemail="e7b38695868b86d5d3d3d2a7829f868a978b82c984888a"
-                          >[email&#160;protected]</a
+                  
+                        
+                          ><?php echo ucfirst($siteinfo['site_email']);?></a
                         ></span
                       >
                     </p>
                     <p>
-                      Phone : <span class="text-dark">+1 987 654 3210</span>
+                      Phone : <span class="text-dark"><?php echo ucfirst($siteinfo['site_phone']);?></span>
                     </p>
                   </div>
                 </div>
                 <div class="col-md-5">
                   <p class="text-dark mb-2 fw-semibold">To</p>
                   <div>
-                    <h4 class="mb-1">Carl Evans</h4>
-                    <p class="mb-1">3103 Trainer Avenue Peoria, IL 61602</p>
+                    <h4 class="mb-1"><?php echo ucfirst($booking['customer_name']);?></h4>
+                    <p class="mb-1"><?php echo ucfirst($booking['customer_address']);?></p>
                     <p class="mb-1">
                       Email :
                       <span class="text-dark"
                         ><a
-                          href="https://dreamspos.dreamstechnologies.com/cdn-cgi/l/email-protection"
-                          class="__cf_email__"
-                          data-cfemail="f0a3918291af999e93c3c4b09588919d809c95de939f9d"
-                          >[email&#160;protected]</a
+                          
+                        
+                          ><?php echo ucfirst($booking['customer_email']);?></a
                         ></span
                       >
                     </p>
                     <p>
-                      Phone : <span class="text-dark">+1 987 471 6589</span>
+                      Phone : <span class="text-dark"><?php echo ucfirst($booking['customer_phone']);?></span>
                     </p>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="mb-3">
                     <p class="text-title mb-2 fw-medium">Payment Status</p>
-                    <span class="bg-success text-white fs-10 px-1 rounded"
-                      ><i class="ti ti-point-filled"></i>Paid</span
-                    >
+                 <?php
+$paymentStatus = strtolower($booking['payment_status']); // normalize case
+$statusClass = $paymentStatus === 'paid' ? 'bg-success text-white' : 'bg-warning text-dark';
+?>
+<span class="<?php echo $statusClass; ?> fs-10 px-1 rounded">
+  <i class="ti ti-point-filled"></i>
+  <?php echo ucfirst($paymentStatus); ?>
+</span>
+
                     <div class="mt-3">
-                      <img src="assets/img/qr.svg" class="img-fluid" alt="QR" />
-                    </div>
+
+                  </div>
                   </div>
                 </div>
               </div>
@@ -762,81 +760,61 @@ include "../../includes/session.php";
                 <p class="fw-medium">
                   Invoice For :
                   <span class="text-dark fw-medium"
-                    >Design & development of Website</span
+                    ><?php echo ucfirst($booking['category_name'])." - ".ucfirst($booking['product_name'])
+                    ." - ".ucfirst($booking['car_type'])." - ".ucfirst($booking['car_info']);?></span
                   >
                 </p>
                 <div class="table-responsive mb-3">
                   <table class="table">
                     <thead class="thead-light">
                       <tr>
-                        <th>Job Description</th>
-                        <th class="text-end">Qty</th>
-                        <th class="text-end">Cost</th>
-                        <th class="text-end">Discount</th>
-                        <th class="text-end">Total</th>
+                        <th>Sevice Description</th>
+                        <th class="text-end"></th>
+                        <th class="text-end"></th>
+                        <th class="text-end"></th>
+                        <th class="text-end">Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><h6>UX Strategy</h6></td>
-                        <td class="text-gray-9 fw-medium text-end">1</td>
-                        <td class="text-gray-9 fw-medium text-end">$500</td>
-                        <td class="text-gray-9 fw-medium text-end">$100</td>
-                        <td class="text-gray-9 fw-medium text-end">$500</td>
+                        <td><h6><?php echo ucfirst($booking['product_name']);?></h6></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end">
+                          <?php echo $siteinfo['site_currency']."". ucfirst($booking['price']);?></td>
                       </tr>
                       <tr>
-                        <td><h6>Design System</h6></td>
-                        <td class="text-gray-9 fw-medium text-end">1</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
-                        <td class="text-gray-9 fw-medium text-end">$100</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
+                        <td><h6>Call Out Fee</h6></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end"></td>
+                        <td class="text-gray-9 fw-medium text-end"><?php echo $siteinfo['site_currency']."". ucfirst($booking['callout_fee']);?></td>
                       </tr>
-                      <tr>
-                        <td><h6>Brand Guidellines</h6></td>
-                        <td class="text-gray-9 fw-medium text-end">1</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
-                        <td class="text-gray-9 fw-medium text-end">$100</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
-                      </tr>
-                      <tr>
-                        <td><h6>Social Media Template</h6></td>
-                        <td class="text-gray-9 fw-medium text-end">1</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
-                        <td class="text-gray-9 fw-medium text-end">$100</td>
-                        <td class="text-gray-9 fw-medium text-end">$5000</td>
-                      </tr>
+                
+                      
+                 
+                      
                     </tbody>
                   </table>
                 </div>
               </div>
               <div class="row border-bottom mb-3">
                 <div class="col-md-5 ms-auto mb-3">
-                  <div
-                    class="d-flex justify-content-between align-items-center border-bottom mb-2 pe-3"
-                  >
-                    <p class="mb-0">Sub Total</p>
-                    <p class="text-dark fw-medium mb-2">$5500</p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-between align-items-center border-bottom mb-2 pe-3"
-                  >
-                    <p class="mb-0">Discount (0%)</p>
-                    <p class="text-dark fw-medium mb-2">$400</p>
-                  </div>
-                  <div
-                    class="d-flex justify-content-between align-items-center mb-2 pe-3"
-                  >
-                    <p class="mb-0">VAT (5%)</p>
-                    <p class="text-dark fw-medium mb-2">$54</p>
-                  </div>
+               
+                
+                
+                  
+             
+                  
                   <div
                     class="d-flex justify-content-between align-items-center mb-2 pe-3"
                   >
                     <h5>Total Amount</h5>
-                    <h5>$5775</h5>
+                    <h5><?php echo $siteinfo['site_currency'] . number_format($totalAmount, 2); ?></h5>
                   </div>
                   <p class="fs-12">
-                    Amount in Words : Dollar Five thousand Seven Seventy Five
+                    Amount in Words : <?php echo   $amountInWords; ?>
                   </p>
                 </div>
               </div>
@@ -846,52 +824,52 @@ include "../../includes/session.php";
                     <div class="mb-3">
                       <h6 class="mb-1">Terms and Conditions</h6>
                       <p>
-                        Please pay within 15 days from the date of invoice,
-                        overdue interest @ 14% will be charged on delayed
-                        payments.
+                        <?php echo $siteinfo['site_terms']; ?>
+                     
                       </p>
                     </div>
                     <div class="mb-3">
                       <h6 class="mb-1">Notes</h6>
-                      <p>Please quote invoice number when remitting funds.</p>
+                      <p> <?php echo $siteinfo['site_note']; ?></p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-5">
                   <div class="text-end">
                     <img
-                      src="assets/img/sign.svg"
+                      src="<?php echo ($admin['signature_url']);?>"
                       class="img-fluid"
                       alt="sign"
+                        style="width: 120px; height: 40px;"
+
                     />
                   </div>
                   <div class="text-end mb-3">
-                    <h6 class="fs-14 fw-medium pe-3">Ted M. Davis</h6>
-                    <p>Assistant Manager</p>
+                    <h6 class="fs-14 fw-medium pe-3"><?php echo ucfirst($admin['username']);?></h6>
+                    <p><?php echo $admin['admin_role'];?></p>
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <div class="mb-3">
                   <img
-                    src="assets/img/logo.svg"
+                    src="<?php echo ($siteinfo['site_logo']);?>"
                     width="130"
                     class="img-fluid"
                     alt="logo"
                   />
                 </div>
                 <p class="text-dark mb-1">
-                  Payment Made Via bank transfer / Cheque in the name of Thomas
-                  Lawler
+                  Payment Made Via bank transfer / Cheque in the name of <?php echo ucfirst($sitebank['account_name']);?>
                 </p>
                 <div class="d-flex justify-content-center align-items-center">
                   <p class="fs-12 mb-0 me-3">
-                    Bank Name : <span class="text-dark">HDFC Bank</span>
+                    Bank Name : <span class="text-dark"> <?php echo ucfirst($sitebank['bank_name']);?></span>
                   </p>
                   <p class="fs-12 mb-0 me-3">
-                    Account Number : <span class="text-dark">45366287987</span>
+                    Account Number : <span class="text-dark"> <?php echo ucfirst($sitebank['account_number']);?></span>
                   </p>
-                  <p class="fs-12">
+                  <p class="fs-12 d-none">
                     IFSC : <span class="text-dark">HDFC0018159</span>
                   </p>
                 </div>
@@ -901,16 +879,15 @@ include "../../includes/session.php";
           <!-- /Invoices -->
 
           <div class="d-flex justify-content-center align-items-center mb-4">
-            <a
-              href="#"
-              class="btn btn-primary d-flex justify-content-center align-items-center me-2"
-              ><i class="ti ti-printer me-2"></i>Print Invoice</a
+          
+          
+  <a
+    href="#"
+    class="btn btn-primary d-flex justify-content-center align-items-center me-2 print-btn"
+  >              <i class="ti ti-printer me-2"></i>Print Invoice</a
             >
-            <a
-              href="#"
-              class="btn btn-secondary d-flex justify-content-center align-items-center border"
-              ><i class="ti ti-copy me-2"></i>Clone Invoice</a
-            >
+        
+            
           </div>
         </div>
        	<?php include ("../../includes/footer.php");?>
@@ -999,14 +976,37 @@ include "../../includes/session.php";
       data-cf-settings="273dda1991057fa509273705-|49"
       defer
     ></script>
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-      integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-      data-cf-beacon='{"rayId":"986111a33a5cef4a","version":"2025.9.1","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}'
-      crossorigin="anonymous"
-    ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.action-btn, .print-btn');
+  if (!btn) return;
+
+  e.preventDefault();
+
+  const action = btn.dataset.action || 'print'; // default print for .print-btn
+
+  if (action === 'print') {
+    window.print();
+  }
+
+  if (action === 'pdf') {
+    const element = document.getElementById('invoice-section');
+    const opt = {
+      margin:       0.5,
+      filename:     '#<?php echo $booking['booking_id'];?>-invoice.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().from(element).set(opt).save();
+  }
+});
+</script>
+
+
+    
   </body>
 
-  <!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/invoice-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Sep 2025 06:13:15 GMT -->
-</html>
+
+  </html>

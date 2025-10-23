@@ -9,13 +9,23 @@ function getSiteInfo($conn) {
         return null; // no record found
     }
 }
+function getSiteBank($conn) {
+    $sql = "SELECT * FROM ".BANKS." ORDER BY id ASC LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result);
+    } else {
+        return null; // no record found
+    }
+}
 
 function updateSiteInfo($conn, $data) {
     $stmt = $conn->prepare("UPDATE " . SITEINFO . " 
-        SET site_name=?, site_email=?, site_phone=?, site_logo=?, site_address=?, site_state=?, site_city=?, site_currency=?, site_mileage_price=?
+        SET site_name=?, site_email=?, site_phone=?, site_logo=?, site_address=?, site_state=?, site_city=?, site_currency=?, site_mileage_price=?, site_lon=?, site_lat=?
         WHERE id=1");
     $stmt->bind_param(
-        "sssssssss",
+        "ssssssssiss",
         $data['site_name'],
         $data['site_email'],
         $data['site_phone'],
@@ -24,7 +34,9 @@ function updateSiteInfo($conn, $data) {
         $data['site_state'],
         $data['site_city'],
         $data['site_currency'],
-        $data['site_millage_price']
+        $data['site_millage_price'],
+        $data['site_lon'],
+        $data['site_lat'],
     );
     return $stmt->execute();
 }
@@ -70,6 +82,75 @@ function getAdminInfo($conn) {
         }
     }
     return false; // not logged in or invalid session
+}
+
+
+
+function getWorkingHours($conn) {
+    $sql = "SELECT c.*, a.username 
+            FROM ".WORKINGHOURS." c
+            LEFT JOIN " . ADMINS . "  a ON c.added_by = a.id
+            ORDER BY c.created_at DESC";
+    $result = mysqli_query($conn, $sql);
+
+    $working_hours = [];
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $working_hours[] = $row;
+        }
+    }
+    return $working_hours;
+}
+function updateWorkingHours($conn, $data) {
+    $stmt = $conn->prepare("
+        UPDATE " . WORKINGHOURS . " 
+        SET open_time = ?, close_time = ? 
+        WHERE id = ?
+    ");
+    $stmt->bind_param("ssi", $data['open_time'], $data['close_time'], $data['id']);
+    return $stmt->execute();
+}
+
+
+
+function updateBankInfo($conn, $data) {
+    $stmt = $conn->prepare("UPDATE " . BANKS . " 
+        SET bank_name=?, account_number=?, account_name=?
+        WHERE id=1");
+    $stmt->bind_param(
+        "sss",
+        $data['bank'],
+        $data['account'],
+        $data['accountName'],
+    
+    );
+    return $stmt->execute();
+}
+function updateAdminSignature($conn, $data) {
+    $stmt = $conn->prepare("UPDATE " . ADMINS . " SET signature_url = ? WHERE id = ?");
+    
+    if (!$stmt) {
+        error_log("Prepare failed: " . $conn->error);
+        return false;
+    }
+
+    $stmt->bind_param("si", $data['admin_signature'], $data['admin_id']);
+
+    return $stmt->execute();
+}
+
+
+function updateAdminPass($conn, $data) {
+    $stmt = $conn->prepare("UPDATE " . ADMINS . " SET password = ? WHERE id = ?");
+    
+    if (!$stmt) {
+        error_log("Prepare failed: " . $conn->error);
+        return false;
+    }
+
+    $stmt->bind_param("si", $data['newpass'], $data['admin_id']);
+
+    return $stmt->execute();
 }
 
 

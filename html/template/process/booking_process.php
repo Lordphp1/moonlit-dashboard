@@ -1,6 +1,5 @@
 <?php
 include "./../../../includes/session.php";
-
 header("Content-Type: application/json");
 
 $action = $_POST['action'] ?? '';
@@ -13,12 +12,16 @@ switch ($action) {
         $frontend_price = floatval($_POST['price']); // frontend price (for reference)
         $location_type  = trim($_POST['location_type']);
         $customer_name  = trim($_POST['customer_name']);
+        $carInfo = trim($_POST['car_make']);
         $customer_email = trim($_POST['customer_email']);
+        $washing_time   = trim($_POST['selected_time']);
         $customer_phone = trim($_POST['customer_phone']);
         $customer_addr  = $_POST['customer_address'] ?? null;
         $washing_date   = $_POST['washing_date'];
         $payment_method = $_POST['payment_method'];
         $payment_status = $_POST['payment_status'] ?? "pending";
+        $lat            = isset($_POST['site_lat']) ? floatval($_POST['site_lat']) : null;
+        $lng            = isset($_POST['site_lon']) ? floatval($_POST['site_lon']) : null;
 
         // ✅ Validation
         if (empty($car_type_id) || empty($product_id) || empty($customer_name) || empty($washing_date)) {
@@ -26,11 +29,41 @@ switch ($action) {
             exit;
         }
 
-        // ✅ Securely fetch price from DB (ignore frontend value)
-        $verified_price = getProductPrice($conn, $car_type_id, $product_id);
-        if ($verified_price <= 0) {
+        // ✅ Securely fetch base price from DB
+        $verified_base_price = getProductPrice($conn, $car_type_id, $product_id);
+        if ($verified_base_price <= 0) {
             echo json_encode(["status" => "error", "message" => "Invalid price for selected car type and product"]);
             exit;
+        }
+
+        // ✅ Get site info for mileage calculation
+        $pricePerKm = $siteinfo['site_mileage_price'] ?? 4.76; // R4.76 per km (AA rate)
+        $siteLat = isset($siteinfo['site_lat']) ? floatval($siteinfo['site_lat']) : null;
+        $siteLng = isset($siteinfo['site_lon']) ? floatval($siteinfo['site_lon']) : null;
+        $includedAmount = 60; // R60 already included in base price
+
+        // ✅ Calculate total price including mileage
+        $basePrice = floatval($verified_base_price);
+        $totalPrice = $basePrice;
+        $callout_fee = 0;
+        $distance = 0;
+
+        // Calculate callout fee if customer location is provided
+        if ($lat && $lng && $siteLat && $siteLng && $pricePerKm > 0) {
+            // Calculate one-way distance
+            $distanceOneWay = haversineDistance($lat, $lng, $siteLat, $siteLng);
+            
+            // Calculate round trip distance (there and back)
+            $distance = $distanceOneWay * 2;
+            
+            // Calculate mileage cost: (distance * rate) - R60 already included
+            $mileageCost = ($distance * $pricePerKm) - $includedAmount;
+            
+            // Only add positive mileage costs (don't give discounts for close locations)
+            if ($mileageCost > 0) {
+                $callout_fee = $mileageCost;
+                $totalPrice += $callout_fee;
+            }
         }
 
         // ✅ Add or update customer
@@ -48,9 +81,30 @@ switch ($action) {
             $customer_id = $conn->insert_id;
         }
 
-        // ✅ Record booking
-        if (addBooking($conn, $car_type_id, $product_id, $verified_price, $location_type, $customer_id, $washing_date, $payment_method, $payment_status)) {
-            echo json_encode(["status" => "success", "message" => "Booking recorded successfully"]);
+        // ✅ Record booking with callout fee
+        if (addBooking(
+            $conn,
+            $car_type_id,
+            $product_id,
+            round($basePrice, 2),
+            $location_type,
+            $customer_id,
+            $washing_date,
+            $payment_method,
+            $payment_status,
+            $washing_time,
+            round($callout_fee, 2)  // Pass callout fee as separate parameter
+            ,  $carInfo
+        )) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Booking recorded successfully",
+                "base_price" => round($basePrice, 2),
+                "callout_fee" => round($callout_fee, 2),
+                "total_price" => round($totalPrice, 2),
+                "distance_km" => round($distance, 2),
+                "price_per_km" => $pricePerKm
+            ]);
         } else {
             echo json_encode(["status" => "error", "message" => "Failed to record booking"]);
         }
@@ -100,5 +154,24 @@ switch ($action) {
 
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
+}
+
+
+/**
+ * Calculate the distance between two coordinates using the Haversine formula
+ * Returns distance in kilometers
+ */
+function haversineDistance($lat1, $lon1, $lat2, $lon2) {
+    $earthRadius = 6371; // Earth radius in km
+
+    $dLat = deg2rad($lat2 - $lat1);
+    $dLon = deg2rad($lon2 - $lon1);
+
+    $a = sin($dLat / 2) * sin($dLat / 2) +
+         cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+         sin($dLon / 2) * sin($dLon / 2);
+
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    return $earthRadius * $c; // distance in KM
 }
 ?>

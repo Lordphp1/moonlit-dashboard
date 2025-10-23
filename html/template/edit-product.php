@@ -1,6 +1,19 @@
 <?php 
+
 include "../../includes/session.php";
-?>
+
+  if (isset($_GET['id'])) {
+    $productID = intval($_GET['id']);
+    $product = getProductById($conn, $productID);
+
+    if (!$product)  {
+        echo "product not found.";
+    }
+} else {
+    header("Location: index.php");
+    exit;
+}
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,8 +97,8 @@ include "../../includes/session.php";
 				<div class="page-header">
 					<div class="add-item d-flex">
 						<div class="page-title">
-							<h4 class="fw-bold">Create Product</h4>
-							<h6>Create new product</h6>
+							<h4 class="fw-bold">Edit Product</h4>
+							<h6>edit this product </h6>
 						</div>
 					</div>
 					<ul class="table-top-head">
@@ -119,18 +132,20 @@ include "../../includes/session.php";
 											<div class="col-sm-4 col-12">
 												<div class="mb-3">
 													<label class="form-label">Product Name<span class="text-danger ms-1">*</span></label>
-													<input type="text" class="form-control" name="product_name" required>
+													<input type="text" value="<?php echo $product['product_name'];?>" class="form-control" name="product_name" required>
+													<input type="text" value="<?php echo $product['id'];?>" hidden class="form-control" name="product_id" required>
 												</div>
 											</div>
 											<div class="col-sm-4 col-12">
 												<div class="mb-3">
 													<label class="form-label">Washing Hours
 														 <span class="text-muted">(write the number only)<span class="text-danger ms-1">*</span></label>
-													<input type="text" class="form-control" name="product_hours" required>
+													<input type="text" class="form-control" name="product_hours" value="<?php echo $product['max_hours'];?>"  required>
 												</div>
 											</div>
 											<div class="col-sm-4 col-12">
 												<div class="mb-3">
+                                                  
 													<label class="form-label">Category<span class="text-danger ms-1">*</span></label>
 															<select class="select" name="category_id" required>
 														<option>Select</option>
@@ -138,7 +153,8 @@ include "../../includes/session.php";
 
 															  <?php if (!empty($categories)): ?>
    																 <?php foreach ($categories as $category): ?>
-														<option value="<?php echo $category['category_id'];?>">
+														<option value="<?php echo $category['category_id'];?>"
+                                                         <?php if($product['category_id'] == $category['category_id']){echo "selected";}?> >
 															<?php echo $category['category_name'];?></option>
 														    <?php endforeach; ?>
 															<?php else: ?>
@@ -151,12 +167,11 @@ include "../../includes/session.php";
 										
 										</div>
 									
-									
 															<!-- Editor Box -->
 						<div class="col-lg-12">
 						<div class="summer-description-box">
 							<label class="form-label">Description</label>
-							<div class="editor pages-editor"></div>
+							<div class="editor pages-editor"><?php echo($product['product_description']); ?></div>
 							<p class="fs-14 mt-1">Maximum 60 Words</p>
 						</div>
 						</div>
@@ -184,28 +199,44 @@ include "../../includes/session.php";
 											<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
 												aria-labelledby="pills-home-tab">
 												<div class="single-product">
-												<div class="row">
-														<?php 
-													   $cartypes = getCarTypes($conn);
-												?>  <?php if (!empty($cartypes)): ?>
-   																 <?php foreach ($cartypes as $cartype): ?>
-													<div class="col-lg-4 col-sm-6 col-12">
-														<div class="mb-3">
-															<label class="form-label"><?php echo $cartype['car_name'];?><span class="text-danger ms-1">*</span></label>
-														
-															<input type="number" step="0.01" class="form-control" name="prices[<?php echo $cartype['car_id'];?>]">
+										<div class="row">
+    <?php 
+        $cartypes = getCarTypes($conn);
+        // Create a map of car_type_id => price from the existing product prices
+        $existingPrices = [];
+        if (!empty($product['prices'])) {
+            foreach ($product['prices'] as $price) {
+                $existingPrices[$price['car_type_id']] = $price['price'];
+            }
+        }
+    ?>
 
-														</div>
-													</div>
-												  <?php endforeach; ?>
-															<?php else: ?>
-																<p>No Car types.</p>
-															<?php endif; ?>
-													<div class="col-lg-4 col-sm-6 col-12">
-													
-													</div>
-									
-												</div>
+    <?php if (!empty($cartypes)): ?>
+        <?php foreach ($cartypes as $cartype): 
+            $carId = $cartype['car_id'];
+            $priceValue = isset($existingPrices[$carId]) ? $existingPrices[$carId] : '';
+        ?>
+            <div class="col-lg-4 col-sm-6 col-12">
+                <div class="mb-3">
+                    <label class="form-label">
+                        <?php echo htmlspecialchars($cartype['car_name']); ?>
+                        <span class="text-danger ms-1">*</span>
+                    </label>
+                    <input 
+                        type="number" 
+                        step="0.01" 
+                        class="form-control"
+                        name="prices[<?php echo $carId; ?>]"
+                        value="<?php echo htmlspecialchars($priceValue); ?>"
+                    >
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No Car types.</p>
+    <?php endif; ?>
+</div>
+
 											</div>		
 											</div>
 											<div class="tab-pane fade" id="pills-profile" role="tabpanel"
@@ -227,12 +258,12 @@ include "../../includes/session.php";
 					<div class="col-lg-12">
 						<div class="d-flex align-items-center justify-content-end mb-4">
 							<button type="button" class="btn btn-secondary me-2">Cancel</button>
-							<button type="submit" class="btn btn-primary">Add Product</button>
+							<button type="submit" class="btn btn-primary">Update Product</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			<!-- Toast Container -->
+            <!-- Toast Container -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
   <div id="toastMessage" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
@@ -243,8 +274,6 @@ include "../../includes/session.php";
 </div>
 
 					<?php include "../../includes/footer.php";?>
-
-					
 
 		</div>
 	</div>
@@ -275,7 +304,7 @@ document.querySelector(".add-product-form").addEventListener("submit", function(
     let formData = new FormData(form);
 
     // Add action=add
-    formData.append("action", "add");
+    formData.append("action", "edit");
 
     // Replace description with summer-description-box innerHTML
     let descriptionHTML = document.querySelector(".summer-description-box").innerHTML;
@@ -292,10 +321,11 @@ document.querySelector(".add-product-form").addEventListener("submit", function(
     })
     .then(res => res.json())
     .then(data => {
+            console.log("Response length:", data.status);
+
         if(data.status === "success") {
             showToast("success", data.message);
-            form.reset();
-         //   $('.pages-editor').summernote('reset'); // clear editor
+           // $('.pages-editor').summernote('reset'); // clear editor
         } else {
             showToast("error", data.message);
         }
@@ -309,27 +339,34 @@ document.querySelector(".add-product-form").addEventListener("submit", function(
     });
 });
 
-// Toast function
 function showToast(type, message) {
     let bg = type === "success" ? "bg-success" : "bg-danger";
     let toastEl = document.getElementById("toastMessage");
     let toastText = document.getElementById("toastText");
 
-    // Reset background color
+    if (!toastEl || !toastText) {
+        console.error("Toast elements not found in DOM");
+        return;
+    }
+
+    // Reset background classes
     toastEl.classList.remove("bg-success", "bg-danger");
     toastEl.classList.add(bg);
 
     toastText.textContent = message;
 
-    // Initialize & show using Bootstrap's Toast class
-    let toast = new bootstrap.Toast(toastEl);
+    // Recreate toast (to reset any previous state)
+    let toast = bootstrap.Toast.getInstance(toastEl);
+    if (toast) toast.dispose();
+
+    // Initialize a fresh Bootstrap toast
+    toast = new bootstrap.Toast(toastEl, { delay: 3000 });
     toast.show();
 }
 
 </script>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+	
 	<!-- jQuery -->
 	<script src="assets/js/jquery-3.7.1.min.js" type="712042956002651bb9418e95-text/javascript"></script>
 
