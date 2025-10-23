@@ -14,6 +14,18 @@ function getCarTypes($conn) {
     }
     return $categories;
 }
+function getCustomers($conn) {
+    $sql = "SELECT * FROM ".CUSTOMERS." ORDER BY created_at DESC";
+    $result = mysqli_query($conn, $sql);
+
+    $customers = [];
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $customers[] = $row;
+        }
+    }
+    return $customers;
+}
 function getCarTypesWithPrices($conn) {
     // Fetch all car types and the admin who added them
     $sql = "SELECT c.*, a.username 

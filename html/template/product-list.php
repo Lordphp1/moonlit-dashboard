@@ -112,8 +112,7 @@ include "../../includes/session.php";
                 <h6>Manage your products</h6>
               </div>
             </div>
-  
-            
+
             <div class="page-btn">
               <a href="add-product.php" class="btn btn-primary"
                 ><i class="ti ti-circle-plus me-1"></i>Add Product</a

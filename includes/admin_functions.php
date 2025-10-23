@@ -23,9 +23,9 @@ function getSiteBank($conn) {
 function updateSiteInfo($conn, $data) {
     $stmt = $conn->prepare("UPDATE " . SITEINFO . " 
         SET site_name=?, site_email=?, site_phone=?, site_logo=?, site_address=?, site_state=?, site_city=?, site_currency=?, site_mileage_price=?, site_lon=?, site_lat=?
-        WHERE id=1");
+      , site_terms=?, site_note=?  WHERE id=1");
     $stmt->bind_param(
-        "ssssssssiss",
+        "ssssssssissss",
         $data['site_name'],
         $data['site_email'],
         $data['site_phone'],
@@ -37,6 +37,8 @@ function updateSiteInfo($conn, $data) {
         $data['site_millage_price'],
         $data['site_lon'],
         $data['site_lat'],
+        $data['site_terms'],
+        $data['site_note'],
     );
     return $stmt->execute();
 }

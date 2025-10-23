@@ -228,24 +228,53 @@ include "../../includes/session.php";
 													</div>
 												
 												<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            State <span class="text-danger">*</span>
-        </label>
-        <input id="site_state"  readonly  type="text" name="site_state" class="form-control" value="<?php echo $siteinfo['site_state'];?>">
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="mb-3">
-        <label class="form-label">
-            City <span class="text-danger">*</span>
-        </label>
-        <input id="site_city" readonly  type="text" name="site_city" class="form-control" value="<?php echo $siteinfo['site_city'];?>">
-    </div>
-</div>
-<input type="hidden" id="site_lon" name="site_lon" value="<?php echo $siteinfo['site_lon']; ?>">
-<input type="hidden" id="site_lat" name="site_lat" value="<?php echo $siteinfo['site_lat']; ?>">
+													<div class="mb-3">
+														<label class="form-label">
+															State <span class="text-danger">*</span>
+														</label>
+														<input id="site_state"  readonly  type="text" name="site_state" class="form-control" value="<?php echo $siteinfo['site_state'];?>">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="mb-3">
+														<label class="form-label">
+															City <span class="text-danger">*</span>
+														</label>
+														<input id="site_city" readonly  type="text" name="site_city" class="form-control" value="<?php echo $siteinfo['site_city'];?>">
+													</div>
+												</div>
+												<input type="hidden" id="site_lon" name="site_lon" value="<?php echo $siteinfo['site_lon']; ?>">
+												<input type="hidden" id="site_lat" name="site_lat" value="<?php echo $siteinfo['site_lat']; ?>">
 
+												</div>
+											</div>
+											<div class="company-address">
+												<div class="card-title-head">
+													<h6 class="fs-16 fw-bold mb-2">
+														<span class="fs-16 me-2"><i class="ti ti-book"></i></span> 
+														Terms
+													</h6>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="mb-3">
+															<label class="form-label">
+																Note <span class="text-danger">*</span>
+															</label>
+															<input  type="text" name="site_note" class="form-control" 
+															 value="<?php echo $siteinfo['site_note'];?>">
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="mb-3">
+															<label class="form-label">
+																Terms <span class="text-danger">*</span>
+															</label>
+															<textarea name="site_terms" class="form-control"><?php echo $siteinfo['site_terms'];?></textarea>
+														
+														</div>
+													</div>
+									
 												</div>
 											</div>
 											<div class="text-end settings-bottom-btn mt-0">

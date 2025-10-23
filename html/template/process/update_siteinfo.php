@@ -38,6 +38,8 @@ $baseUrl = $protocol . "://" . $host . "/html/template/process/";
         'site_state'  => $_POST['site_state'],
         'site_lon'=> $_POST['site_lon'],
         'site_lat'  => $_POST['site_lat'],
+        'site_terms'=> $_POST['site_terms'],
+        'site_note'  => $_POST['site_note'],
         'site_city'   => $_POST['site_city']
     ];
 
