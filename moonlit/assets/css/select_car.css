@@ -34,12 +34,13 @@ body {
 .ob-title-wrap {
   margin-left: 0.5rem;
 }
+
 .ob-title {
   font-weight: 700;
   font-size: 2.5rem;
   color: #fff;
   margin-bottom: 10px;
-  display: inline-block; /* allow ::after to align properly */
+  display: inline-block;
   position: relative;
 }
 
@@ -51,9 +52,8 @@ body {
   background: #ccc;
   margin-left: 15px;
   vertical-align: middle;
-  transform: translateY(-2px); /* fine-tune vertical position */
+  transform: translateY(-2px);
 }
-
 
 .ob-subtitle {
   font-weight: 300;
@@ -70,7 +70,14 @@ body {
   cursor: pointer;
   transition: all 0.4s ease;
   height: 441px;
-  width: 333px;
+  width: 100%;
+  max-width: 333px;
+  margin: 0 auto;
+}
+
+.ob-car-card.selected {
+  border: 3px solid #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 .ob-car-card img {
@@ -118,4 +125,179 @@ body {
 
 .ob-car-card:hover .ob-card-overlay-bottom {
   opacity: 0.9;
+}
+
+/* Selected checkmark */
+.ob-selected-check {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.ob-car-card.selected .ob-selected-check {
+  display: flex;
+}
+
+.ob-selected-check::after {
+  content: "✓";
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Continue button */
+.ob-continue-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ob-continue-btn.show {
+  display: block;
+}
+
+.ob-continue-btn:hover {
+  background: #f0f0f0;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.ob-continue-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .ob-car-selection {
+    padding: 40px 15px 100px;
+  }
+
+  .ob-title-wrap {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .ob-title {
+    font-size: 1.8rem;
+    display: block;
+    text-align: center;
+  }
+
+  .ob-title::after {
+    display: none;
+  }
+
+  .ob-subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .ob-car-card {
+    height: 350px;
+    max-width: 100%;
+  }
+
+  .ob-car-card img {
+    height: 350px;
+  }
+
+  .ob-car-name {
+    font-size: 1rem;
+    top: 12px;
+    left: 12px;
+  }
+
+  .ob-selected-check {
+    width: 30px;
+    height: 30px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .ob-selected-check::after {
+    font-size: 18px;
+  }
+
+  .ob-continue-btn {
+    bottom: 20px;
+    width: calc(100% - 40px);
+    max-width: 400px;
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+
+  /* Stack cards on mobile */
+  .row.justify-content-start > div {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ob-car-selection {
+    padding: 30px 10px 100px;
+  }
+
+  .ob-title {
+    font-size: 1.5rem;
+  }
+
+  .ob-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .ob-car-card {
+    height: 300px;
+  }
+
+  .ob-car-card img {
+    height: 300px;
+  }
+
+  .ob-car-name {
+    font-size: 0.9rem;
+  }
+
+  .ob-continue-btn {
+    width: calc(100% - 30px);
+    padding: 10px 25px;
+    font-size: 15px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 991px) {
+  .ob-car-card {
+    max-width: 280px;
+    height: 380px;
+  }
+
+  .ob-car-card img {
+    height: 380px;
+  }
+
+  .ob-title {
+    font-size: 2rem;
+  }
 }

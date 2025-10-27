@@ -1,9 +1,12 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+
 body {
   font-family: 'League Spartan', sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-height: 100%;}
+  height: 100%;
+}
 
 .ob-main-container {
   height: 100vh;
@@ -20,16 +23,19 @@ height: 100%;}
   background: url('../images/date-car.jpg') no-repeat center center/cover;
   height: 100vh;
 }
+
 .ob-book-left {
   background: url('../images/lady-washing.jpg') no-repeat center center/cover;
   height: 100vh;
 }
+
 /* Right section */
 .ob-right {
   background: url('../images/rightbanner.jpg') no-repeat center center/cover;
   color: #fff;
   height: 100vh;
   position: relative;
+  padding: 20px;
 }
 
 .ob-right::before {
@@ -43,12 +49,16 @@ height: 100%;}
   position: relative;
   z-index: 2;
   max-width: 500px;
+  width: 100%;
+  padding: 0 15px;
 }
-.mt-10{
-    margin-top: 40px;
+
+.mt-10 {
+  margin-top: 40px;
 }
+
 .ob-btn-outline {
-  border: 3px solid #fff;
+  border: 1px solid #fff;
   color: #fff;
   background: transparent;
   border-radius: 10px;
@@ -60,10 +70,43 @@ height: 100%;}
   position: relative;
 }
 
+#preloader {
+  transition: opacity 0.5s ease;
+}
+
 /* Selected button */
 .ob-btn-outline.active {
-  background: #fff;
   color: #000;
+  border: 1px solid #fff;
+  background-color: #fff;
+}
+
+.address-container {
+  transition: all 0.5s ease-in-out;
+}
+
+.animate__fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.copy-btn {
+  border-radius: 20px;
+  border: none; 
+  background-color: black;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
 }
 
 .ob-select-icon {
@@ -82,7 +125,7 @@ height: 100%;}
 
 .ob-select-icon-two {
   color: #000;
-   background-color: #fff;
+  background-color: #fff;
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
@@ -93,13 +136,14 @@ height: 100%;}
   margin-left: 35px;
   margin-right: 5px;
 }
+
 /* Address Input */
 .ob-input {
   border-radius: 10px;
   padding: 12px;
   border: none;
   outline: none;
-  width: 80%;
+  width: 100%;
 }
 
 /* Main Button */
@@ -143,7 +187,8 @@ height: 100%;}
   position: relative;
   cursor: pointer;
   border-radius: 5px;
-  margin-right: 6px; /* small, natural spacing */
+  margin-right: 6px;
+  flex-shrink: 0;
 }
 
 .ob-custom-check .form-check-input:checked {
@@ -163,20 +208,17 @@ height: 100%;}
   margin-left: 2px;
 }
 
-/* Reduce space between box and label */
 .ob-custom-check .form-check-label {
   margin-left: 2px !important;
   font-size: 15px;
 }
 
-/* Adjust wrapper alignment */
 .ob-custom-check {
   display: flex;
   align-items: center;
-  gap: 7px; /* minimal gap between checkbox and label */
+  gap: 7px;
 }
 
-/* Label font styling */
 .toc-text {
   font-weight: 300;
   font-style: normal;
@@ -186,31 +228,176 @@ height: 100%;}
   margin-top: 5px;
 }
 
-.btn-for-info{
-    background-color: #9B24AB;
-    padding: 20px ;
-    border: none;
-    font-weight: 400px;
-    border-radius: 10px;
+.btn-for-info {
+  background-color: #9B24AB;
+  padding: 20px;
+  border: none;
+  font-weight: 400px;
+  border-radius: 10px;
 }
-.btn-for-info :hover{
-    background-color: #000;
-}
-.back-div{
-    padding-top: 10px;
-}
-.text-hash{
-    color: #666666;
-font-weight: 400;
-font-style: 'Regular';
-font-size: 20px;
-line-height: line 30px;
-letter-spacing: -0.5px;
-text-align: center;
-vertical-align: middle;
-text-transform: capitalize;
 
+.btn-for-info:hover {
+  background-color: #000;
 }
-.ob-btn-outline :hover{
-    background-color: white !important;
+
+.back-div {
+  padding-top: 10px;
+}
+
+.text-hash {
+  color: #666666;
+  font-weight: 400;
+  font-style: 'Regular';
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.ob-btn-outline:hover {
+  background-color: white !important;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .ob-main-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .ob-right {
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 15px;
+  }
+
+  .ob-form-box {
+    padding: 20px 10px;
+  }
+
+  .title-text {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .title-description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .mt-10 {
+    margin-top: 25px;
+  }
+
+  /* Button adjustments */
+  .ob-btn-outline {
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 160px;
+  }
+
+  .d-flex.gap-3 {
+    gap: 10px !important;
+    flex-wrap: wrap;
+  }
+
+  /* Input adjustments */
+  .ob-input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* Address section adjustments */
+  #addressSection .row,
+  #ourAddressSection .row {
+    margin: 0;
+  }
+
+  #addressSection .col-2,
+  #ourAddressSection .col-2 {
+    display: none;
+  }
+
+  #addressSection .col-10,
+  #ourAddressSection .col-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  /* Card adjustments */
+  .card {
+    font-size: 14px;
+    padding: 15px !important;
+  }
+
+  .copy-btn {
+    position: static !important;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  /* Checkbox adjustments */
+  .ob-custom-check .form-check-input {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ob-custom-check .form-check-label,
+  .toc-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  /* Continue button */
+  #continueBtn {
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+  }
+
+  .tick {
+    width: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-text {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .title-description {
+    font-size: 13px;
+  }
+
+  .ob-btn-outline {
+    font-size: 13px;
+    padding: 8px 12px;
+    max-width: 140px;
+  }
+
+  .mt-10 {
+    margin-top: 20px;
+  }
+
+  .ob-right {
+    padding: 20px 10px;
+  }
+}
+
+/* Landscape mobile fix */
+@media (max-height: 600px) and (orientation: landscape) {
+  .ob-right {
+    height: auto;
+    padding: 20px 15px;
+  }
+
+  .mt-10 {
+    margin-top: 15px;
+  }
 }

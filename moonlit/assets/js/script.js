@@ -1,39 +1,35 @@
-const myPlaceBtn = document.getElementById("myPlaceBtn");
-const ourHubBtn = document.getElementById("ourHubBtn");
-const addressSection = document.getElementById("addressSection");
-const selectIcon = document.querySelector(".ob-select-icon");
-const proceedBtn = document.getElementById("continueBtn");
 
-myPlaceBtn.addEventListener("click", () => {
-  myPlaceBtn.classList.add("active");
-  ourHubBtn.classList.remove("active");
-  selectIcon.classList.remove("d-none");
-  addressSection.classList.remove("d-none");
-});
 
-ourHubBtn.addEventListener("click", () => {
-  ourHubBtn.classList.add("active");
-  myPlaceBtn.classList.remove("active");
-  selectIcon.classList.add("d-none");
-  addressSection.classList.add("d-none");
-});
+// Create Preloader
+const preloader = document.createElement("div");
+preloader.innerHTML = `
+  <div id="preloader" style="
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.8);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  ">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+`;
+document.body.appendChild(preloader);
 
-proceedBtn.addEventListener("click", function() {
-  const checkbox = document.getElementById("confirmCheck");
-  if (!addressSection.classList.contains("d-none") && !checkbox.checked) {
-    alert("Please confirm you can provide water and electricity before continuing.");
-  } else {
-        window.location = "./select-car.html";
+// Hide preloader after page load
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.style.opacity = "0";
+    setTimeout(() => preloader.style.display = "none", 500);
   }
 });
 
 
-// Optional: You can add interactivity here later (like selecting a car)
-document.querySelectorAll('.ob-car-card').forEach(card => {
-  card.addEventListener('click', () => {
-    alert(`You selected: ${card.querySelector('.ob-car-name').innerText}`);
-  });
-});
+
+
+
 
 
 function goToPlan(){
