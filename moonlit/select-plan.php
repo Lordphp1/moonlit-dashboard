@@ -7,6 +7,7 @@ if (!isset($_SESSION['booking_data'])) {
     exit();
 }
 
+$carID = $_SESSION['booking_data']['carId'];
 require_once('init.php');
 
 $categoriesResponse = fetchFromApi("get_categories", ["limit" => 1000]);
@@ -16,7 +17,7 @@ if ($categoriesResponse['status'] === true) {
     $categories = [];
 }
 
-$planResponse = fetchFromApi("get_products", ["limit" => 1000]);
+$planResponse = fetchFromApi("get_products", ["limit" => 1000, "carID"=> $carID]);
 if ($planResponse['status'] === true) {
     $plans = $planResponse['data'];
 } else {
@@ -52,6 +53,8 @@ function getPlanLabel($features) {
 
 // Border colors for cards (cycles through them)
 $borderColors = ['border-green', 'border-yellow', 'border-purple', 'border-skyblue'];
+$bgColors = ['bg-green', 'bg-yellow', 'bg-purple', 'bg-skyblue'];
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -222,7 +225,7 @@ $borderColors = ['border-green', 'border-yellow', 'border-purple', 'border-skybl
 
           // Get border color (cycles through colors)
           $borderClass = $borderColors[$cardIndex % count($borderColors)];
-                    $bgClass = $bgColors[$colorIndex];
+                  $bgClass = $bgColors[$colorIndex];
 
           $cardIndex++;
         ?>
@@ -231,6 +234,8 @@ $borderColors = ['border-green', 'border-yellow', 'border-purple', 'border-skybl
                data-frequency="<?php echo strtolower(str_replace(' ', '-', $plan['category'])); ?>"
                data-plan-id="<?php echo htmlspecialchars($plan['product_id']); ?>"
                data-plan-name="<?php echo htmlspecialchars($plan['product_name']); ?>"
+               data-plan-category="<?php echo htmlspecialchars($plan['category']); ?>"
+               data-category-id="<?php echo htmlspecialchars($plan['categoryID']); ?>"
                data-plan-category="<?php echo htmlspecialchars($plan['category']); ?>"
                data-plan-price="<?php echo htmlspecialchars($planPrice); ?>"
                data-plan-hours="<?php echo htmlspecialchars($plan['max_hours']); ?>"
@@ -262,7 +267,7 @@ $borderColors = ['border-green', 'border-yellow', 'border-purple', 'border-skybl
                     <ul class="ob-plan-features">
                       <?php foreach ($features as $feature): ?>
                         <li>
-                          <span class="check-icon"><i class="bi bi-check"></i></span>
+                         <img src="assets/images/white-tick.png" style="height: 15px; margin-right: 5px"/>
                           <?php echo htmlspecialchars($feature); ?>
                         </li>
                       <?php endforeach; ?>
@@ -327,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const planPrice = this.getAttribute('data-plan-price');
       const planHours = this.getAttribute('data-plan-hours');
       const planDescription = this.getAttribute('data-plan-description');
+      const categoryId = this.getAttribute('data-category-id');
 
       // Show loading overlay
       loadingOverlay.classList.add('show');
@@ -342,6 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
       bookingData.planPrice = planPrice;
       bookingData.planHours = planHours;
       bookingData.planDescription = planDescription;
+      bookingData.categoryId = categoryId;
 
       // Save to sessionStorage
       sessionStorage.setItem('bookingData', JSON.stringify(bookingData));

@@ -161,7 +161,6 @@ text-transform: capitalize;
 }
 
 .check-icon {
-  background: #fff;
   color: #000;
   border-radius: 50%;
   width: 18px;
@@ -171,6 +170,7 @@ text-transform: capitalize;
   justify-content: center;
   font-size: 0.8rem;
   margin-right: 8px;
+  background-color: #000;
 }
 
 .ob-plan-bottom {
