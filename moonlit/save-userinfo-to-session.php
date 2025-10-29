@@ -13,7 +13,7 @@ $data = json_decode($json, true);
 if ($data && is_array($data)) {
     
     // Validate that car data exists
-    if (!isset($data['userName']) || !isset($data['phoneNumber'])|| !isset($data['paymentMethod']) 
+    if (!isset($data['username']) || !isset($data['phoneNumber'])|| !isset($data['paymentMethod']) 
          || !isset($data['carMake']) || !isset($data['paymentMethod'])) {
         http_response_code(400);
         echo json_encode([

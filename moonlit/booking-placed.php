@@ -1,3 +1,21 @@
+<?php
+require_once('init.php');
+
+// Check if user came from car selection page
+if (!isset($_GET['booking_id'])) {
+    header('Location: index.php');
+    exit();
+}
+
+$bookingID = $_GET['booking_id'];
+
+$getBooking = fetchFromApi("get_booking", ["booking_id" => $bookingID]);
+if ($getBooking['status'] === true) {
+    $booking = $getBooking['data'];
+} else {
+    $booking = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +40,8 @@
 
       <div class="ob-status-card">
         <div class="mt-3">
-        <span class="ob-status-title">Your Booking Status • <span id="bookingId">8973635</span></span>
+        <span class="ob-status-title">Your Booking Status • <span id="bookingId"><?php echo ucfirst($booking['payment_status']); ?>
+</span></span>
 
         </div>
  <div class="mt-10"></div>

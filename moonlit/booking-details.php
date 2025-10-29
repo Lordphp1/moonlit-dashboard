@@ -55,7 +55,7 @@ if (!empty($priceResponse['status']) && ($priceResponse['status'] === true || $p
       <div class="col-md-6 ob-right d-flex align-items-center justify-content-center">
         <div class="ob-form-box text-center">
           <div class="row mb-4 align-items-center">
-            <div class="col-2 back-div"> 
+            <div class="col-2 back-div"  onclick="window.history.back()"> 
               <img src="./assets/images/back.png" class="ml-2" alt="back icon"/>
             </div>
             <div class="col-10 text-start">
@@ -84,6 +84,9 @@ if (!empty($priceResponse['status']) && ($priceResponse['status'] === true || $p
             <input type="email" placeholder="Email" class="ob-input mb-2" id="email">
             <input type="tel" placeholder="Phone Number" class="ob-input mb-2" id="phone_number">
             <input type="text" placeholder="Your Car Make And Model" class="ob-input" id="car_make">
+            <input type="text" placeholder="total_price" class="ob-input" id="total_price" hidden value="<?php echo $priceData['total_price'];?>">
+            <input type="text" placeholder="callout_fee" class="ob-input" id="callout_fee" hidden
+             value="<?php echo $priceData['callout_fee_amt'];?>">
           </div>
 
           <div class="d-flex justify-content-center gap-3">
@@ -97,6 +100,8 @@ if (!empty($priceResponse['status']) && ($priceResponse['status'] === true || $p
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
