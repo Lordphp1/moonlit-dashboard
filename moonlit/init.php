@@ -1,7 +1,7 @@
 <?php
 function fetchFromApi($endpoint, $params = []) {
     // Base URL of your API
-    $baseUrl = "http://localserver/moonlit_dashboard/html/template/api.php";
+    $baseUrl = "https://moonlit.trusttino.com/html/template/api.php";
     
     // Build full URL with query parameters
     $url = $baseUrl . "?action=" . urlencode($endpoint);
