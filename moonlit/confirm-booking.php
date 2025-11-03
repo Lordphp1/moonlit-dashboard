@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-$apiUrl = "http://localserver/moonlit_dashboard/html/template/api.php?action=create_booking";
+$apiUrl = "https://moonlit.trusttino.com/html/template/api.php?action=create_booking";
 
 if (empty($_SESSION['booking_data'])) {
     echo json_encode(['status' => false, 'message' => 'No booking data found']);

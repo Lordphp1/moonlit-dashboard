@@ -274,7 +274,7 @@ $dashboard = getDashboardStats($conn);
                 <strong><?= htmlspecialchars($b['customer_name']) ?></strong><br>
                 <?= htmlspecialchars($b['product_name']) ?> - <?= htmlspecialchars($b['washing_date']) ?> <?= htmlspecialchars($b['washing_time']) ?>
               </span>
-              <a href="calendar-view.php?date=<?= urlencode($b['washing_date']) ?>" class="btn btn-sm btn-outline-primary">View</a>
+              <a href="invoice-details.php?id=<?= urlencode($b['id']) ?>" class="btn btn-sm btn-outline-primary">View</a>
             </li>
           <?php endforeach; ?>
         </ul>
