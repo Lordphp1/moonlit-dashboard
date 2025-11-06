@@ -601,6 +601,9 @@ window.toggleAddressField = function() {
           form.reset();
           // Hide conditional section if visible
           paymentStatusSection.classList.add("d-none");
+           setTimeout(() => {
+        window.location.reload();
+    }, 800); 
         } else {
           showToast("error", data.message || "Failed to add booking!");
         }

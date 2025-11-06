@@ -323,8 +323,7 @@ function getBookingStats($conn) {
             -- Pending wash (Paid but not completed)
             SUM(
                 CASE 
-                    WHEN payment_status = 'paid' 
-                    AND washing_status = 'pending' 
+                    WHEN washing_status = 'pending' 
                     THEN 1 ELSE 0 
                 END
             ) AS total_pending,
@@ -332,15 +331,14 @@ function getBookingStats($conn) {
             -- Today's pending washes (Paid but pending today)
             SUM(
                 CASE 
-                    WHEN payment_status = 'paid' 
-                    AND washing_status = 'pending' 
+                    WHEN washing_status = 'pending' 
                     AND washing_date = ? 
                     THEN 1 ELSE 0 
                 END
             ) AS pending_today,
 
             -- Unpaid invoices
-            SUM(CASE WHEN payment_status = 'unpaid' THEN 1 ELSE 0 END) AS total_unpaid,
+            SUM(CASE WHEN payment_status = 'pending' THEN 1 ELSE 0 END) AS total_unpaid,
 
             -- Paid transactions still in progress
             SUM(

@@ -296,6 +296,9 @@ document.querySelector(".add-product-form").addEventListener("submit", function(
             showToast("success", data.message);
             form.reset();
          //   $('.pages-editor').summernote('reset'); // clear editor
+		         setTimeout(() => {
+        window.location.reload();
+    }, 800); 
         } else {
             showToast("error", data.message);
         }

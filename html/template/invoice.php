@@ -184,8 +184,7 @@ include "../../includes/session.php";
             $totalAmount = floatval($booking['price']);
             $washStatus = $booking['washing_status'] ?? 'pending';
             $receiptInfo = $booking['payment_receipt'] ?? 'No Receipt';
-            // REMOVED: echo $receiptInfo; - This was causing the issue
-    ?>
+            ?>
         <tr data-payment="<?php echo htmlspecialchars($booking['payment_status']); ?>" 
             data-wash="<?php echo htmlspecialchars($washStatus); ?>"
             data-amount="<?php echo $totalAmount; ?>"
@@ -207,22 +206,27 @@ include "../../includes/session.php";
             <td><?php echo htmlspecialchars($booking['car_type']); ?></td>
             <td>
                 <?php
-                if ($booking['payment_method'] == 'pay_after') {
-                    if (!empty($booking['payment_receipt']) && $booking['payment_receipt'] !== 'No Receipt') {
-                        // Check if it's a full path or just filename
-                        $receiptPath = $booking['payment_receipt'];
-                        if (!preg_match('/^https?:\/\//', $receiptPath) && !preg_match('/^uploads\//', $receiptPath)) {
-                            $receiptPath = 'uploads/receipts/' . basename($receiptPath);
-                        }
-                        echo '<a href="' . htmlspecialchars($receiptPath) . '" target="_blank" class="badge badge-soft-primary badge-xs">
-                                <i class="ti ti-file-text me-1"></i>View Receipt
-                              </a>';
-                    } else {
-                        echo '<span class="badge badge-soft-secondary badge-xs">No receipt uploaded</span>';
-                    }
-                } else {
-                    echo '<span class="text-muted">-</span>';
-                }
+                  if($receiptInfo){
+
+                       if (!empty($receiptInfo) && strtolower($receiptInfo) !== 'no receipt' && strtolower($receiptInfo) !== 'no receipt uploaded') {
+
+        // check path
+        if (!preg_match('/^https?:\/\//', $receiptInfo) && !preg_match('/^uploads\//', $receiptInfo)) {
+            $receipt = 'uploads/receipts/' . basename($receiptInfo);
+        }
+
+        echo '<a href="'.htmlspecialchars($receiptInfo).'" target="_blank" class="badge badge-soft-primary badge-xs">
+                <i class="ti ti-file-text me-1"></i>View Receipt
+              </a>';
+
+    } else {
+        echo '<span class="badge badge-soft-secondary badge-xs">No receipt uploaded</span>';
+    }
+
+                  }else{
+                    echo "No Receipt";
+                  }
+              
                 ?>
             </td>
             <td>

@@ -62,9 +62,80 @@ $planID = isset($bookingData['planId']) ? $bookingData['planId'] : '0';
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Toast notification */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+    }
+
+    .custom-toast {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      min-width: 300px;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .custom-toast .toast-header {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .custom-toast .btn-close {
+      filter: brightness(0) invert(1);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Back to calendar button */
+    .back-to-calendar-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 15px;
+      font-weight: 500;
+    }
+
+    .back-to-calendar-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
   </style>
 </head>
 <body>
+
+<!-- Toast Container -->
+<div class="toast-container">
+  <div id="noTimesToast" class="toast custom-toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">⚠️ No Available Times</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Sorry, there are no available times for this date. Please select another day.
+    </div>
+  </div>
+</div>
 
 <!-- Loading overlay -->
 <div class="loading-overlay" id="loadingOverlay">
@@ -133,6 +204,9 @@ $planID = isset($bookingData['planId']) ? $bookingData['planId'] : '0';
               <div id="timesContainer" class="hidden">
                 <!-- Times will be loaded via AJAX -->
               </div>
+              <button class="back-to-calendar-btn" id="backToCalendarBtn" style="display: none;">
+                ← Back to Calendar
+              </button>
             </div>
           </div>
         </div>
@@ -159,12 +233,40 @@ const loadingOverlay = document.getElementById("loadingOverlay");
 const loadingText = document.getElementById("loadingText");
 const calendarSection = document.querySelector(".ob-calendar");
 const timesSection = document.querySelector(".ob-times");
-timesSection.display = "none";
+const backToCalendarBtn = document.getElementById("backToCalendarBtn");
+const noTimesToast = document.getElementById("noTimesToast");
+
 let date = new Date();
 let currentMonth = date.getMonth();
 let currentYear = date.getFullYear();
 let selectedDate = null;
 let selectedTime = null;
+
+// Show toast notification
+function showToast() {
+  const toast = new bootstrap.Toast(noTimesToast, {
+    autohide: true,
+    delay: 5000
+  });
+  toast.show();
+}
+
+// Back to calendar function
+function showCalendar() {
+  calendarSection.style.display = 'block';
+  timesSection.style.flex = '';
+  timesSection.style.maxWidth = '';
+  backToCalendarBtn.style.display = 'none';
+  timesContainer.innerHTML = '';
+  timesContainer.classList.add("hidden");
+  selectedDateText.textContent = '';
+  proceedBtn.style.display = 'none';
+  
+  // Remove active state from calendar days
+  document.querySelectorAll(".ob-days div").forEach(d => d.classList.remove("active"));
+}
+
+backToCalendarBtn.addEventListener('click', showCalendar);
 
 function renderCalendar(month, year) {
   const firstDay = new Date(year, month).getDay();
@@ -230,23 +332,32 @@ function selectDate(day, month, year) {
   .then(response => response.json())
   .then(data => {
     loadingOverlay.classList.remove('show');
-    
-    document.getElementById('calender-box').display = "none";
 
     if (data.status === 'success' && data.available_times && data.available_times.length > 0) {
       calendarSection.style.display = 'none';
       timesSection.style.flex = '1';
       timesSection.style.maxWidth = '100%';
+      backToCalendarBtn.style.display = 'block';
       displayTimes(data.available_times);
     } else {
-      timesContainer.innerHTML = '<p class="text-white text-center">No available times for this date</p>';
-      timesContainer.classList.remove("hidden");
+      // Show toast notification
+      showToast();
+      
+      // Reset selection
+      document.querySelectorAll(".ob-days div").forEach(d => d.classList.remove("active"));
+      selectedDate = null;
+      selectedDateText.textContent = '';
     }
   })
   .catch(error => {
     console.error('Error:', error);
     loadingOverlay.classList.remove('show');
-    alert('Failed to load available times. Please try again.');
+    showToast();
+    
+    // Reset selection
+    document.querySelectorAll(".ob-days div").forEach(d => d.classList.remove("active"));
+    selectedDate = null;
+    selectedDateText.textContent = '';
   });
 }
 

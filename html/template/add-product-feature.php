@@ -236,6 +236,9 @@ document.querySelector(".add-product-form").addEventListener("submit", function(
         if(data.status === "success") {
             showToast("success", data.message);
             form.reset();
+			        setTimeout(() => {
+        window.location.reload();
+    }, 800); 
         } else {
             showToast("error", data.message);
         }
