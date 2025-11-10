@@ -150,8 +150,9 @@ include "../../includes/session.php";
                           <span class="checkmarks"></span>
                         </label>
                       </th>
+                         <th>Product Feature</th>
                       <th>Product Name</th>
-                      <th>Product Feature</th>
+                   
                       <th>Type</th>
                  
                       <th class="no-sort"></th>
