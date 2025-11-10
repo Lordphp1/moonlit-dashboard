@@ -258,6 +258,7 @@ body {
 
 .ob-btn-outline:hover {
   background-color: white !important;
+  color: #000;
 }
 
 /* Mobile Responsive Styles */
